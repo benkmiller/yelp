@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		D6E4F9291E326A7E00DC11AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F9281E326A7E00DC11AA /* AppDelegate.swift */; };
 		D6E4F92B1E326A7E00DC11AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F92A1E326A7E00DC11AA /* ViewController.swift */; };
-		D6E4F92E1E326A7E00DC11AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6E4F92C1E326A7E00DC11AA /* Main.storyboard */; };
 		D6E4F9301E326A7E00DC11AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6E4F92F1E326A7E00DC11AA /* Assets.xcassets */; };
 		D6E4F9331E326A7E00DC11AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6E4F9311E326A7E00DC11AA /* LaunchScreen.storyboard */; };
 		D6E4F9531E32A6C800DC11AA /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E4F9461E32A55100DC11AA /* Alamofire.framework */; };
 		D6E4F9541E32A6C800DC11AA /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6E4F9461E32A55100DC11AA /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6E4F9591E32B87800DC11AA /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F9581E32B87800DC11AA /* SwiftyJSON.swift */; };
 		D6E4F95B1E364F9000DC11AA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F95A1E364F9000DC11AA /* DetailViewController.swift */; };
+		D6E4F95D1E36E38400DC11AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6E4F95C1E36E38400DC11AA /* Main.storyboard */; };
+		D6E4F9611E37A2DE00DC11AA /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F9601E37A2DD00DC11AA /* TitleViewController.swift */; };
+		D6E4F9651E37D68200DC11AA /* YelpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F9641E37D68200DC11AA /* YelpData.swift */; };
+		D6E4F9671E37E37C00DC11AA /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F9661E37E37C00DC11AA /* Restaurant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,13 +98,16 @@
 		D6E4F9251E326A7E00DC11AA /* BenYelpApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BenYelpApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6E4F9281E326A7E00DC11AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6E4F92A1E326A7E00DC11AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D6E4F92D1E326A7E00DC11AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D6E4F92F1E326A7E00DC11AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6E4F9321E326A7E00DC11AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D6E4F9341E326A7E00DC11AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6E4F93A1E32A55100DC11AA /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		D6E4F9581E32B87800DC11AA /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		D6E4F95A1E364F9000DC11AA /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		D6E4F95C1E36E38400DC11AA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		D6E4F9601E37A2DD00DC11AA /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
+		D6E4F9641E37D68200DC11AA /* YelpData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpData.swift; sourceTree = "<group>"; };
+		D6E4F9661E37E37C00DC11AA /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +146,10 @@
 				D6E4F9281E326A7E00DC11AA /* AppDelegate.swift */,
 				D6E4F92A1E326A7E00DC11AA /* ViewController.swift */,
 				D6E4F95A1E364F9000DC11AA /* DetailViewController.swift */,
-				D6E4F92C1E326A7E00DC11AA /* Main.storyboard */,
+				D6E4F9641E37D68200DC11AA /* YelpData.swift */,
+				D6E4F9661E37E37C00DC11AA /* Restaurant.swift */,
+				D6E4F95C1E36E38400DC11AA /* Main.storyboard */,
+				D6E4F9601E37A2DD00DC11AA /* TitleViewController.swift */,
 				D6E4F92F1E326A7E00DC11AA /* Assets.xcassets */,
 				D6E4F9311E326A7E00DC11AA /* LaunchScreen.storyboard */,
 				D6E4F9341E326A7E00DC11AA /* Info.plist */,
@@ -281,9 +290,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6E4F95D1E36E38400DC11AA /* Main.storyboard in Resources */,
 				D6E4F9331E326A7E00DC11AA /* LaunchScreen.storyboard in Resources */,
 				D6E4F9301E326A7E00DC11AA /* Assets.xcassets in Resources */,
-				D6E4F92E1E326A7E00DC11AA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,9 +304,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6E4F9591E32B87800DC11AA /* SwiftyJSON.swift in Sources */,
+				D6E4F9651E37D68200DC11AA /* YelpData.swift in Sources */,
 				D6E4F92B1E326A7E00DC11AA /* ViewController.swift in Sources */,
+				D6E4F9671E37E37C00DC11AA /* Restaurant.swift in Sources */,
 				D6E4F9291E326A7E00DC11AA /* AppDelegate.swift in Sources */,
 				D6E4F95B1E364F9000DC11AA /* DetailViewController.swift in Sources */,
+				D6E4F9611E37A2DE00DC11AA /* TitleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,14 +324,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D6E4F92C1E326A7E00DC11AA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D6E4F92D1E326A7E00DC11AA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D6E4F9311E326A7E00DC11AA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -432,6 +436,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = BenInc.BenYelpApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -445,6 +450,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = BenInc.BenYelpApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

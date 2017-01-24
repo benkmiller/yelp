@@ -11,38 +11,18 @@ import Alamofire
 
 
 class ViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate{
+    var data = YelpData()
     
     
-    let header: HTTPHeaders = [
-        "Authorization": "Bearer FjlrPxjxGLStOinnoJ7wGK2W3GRMXXZmA_bPOOwFsktNC7tIMAcujcmUetfsRMY2_vdIanoVdoDS3iHctClh-k1UN_xmaZ_651dgbx9oChpC2U55yj7KRSSOVz6CWHYx"
-    ]
-
-    let urlForRestaurantId = "https://api.yelp.com/v3/businesses/search?term=ethiopian&latitude=43.649758&longitude=-79.385868"
-    let urlForRestaurantId2 = "https://api.yelp.com/v3/businesses/search?term=ethiopian&location=Tornto"
-    
-    let urlDetail = "https://api.yelp.com/v3/businesses/"
-    
-    let urlP1 = "https://api.yelp.com/v3/businesses/search?term="
-    let urlP2 = "&location="
-    
-    
-   
-   
-    //let totalUrl = urlP1// + urlP2 + "&latitude=" + urlP3 + "&longitude" + urlP4
-    //var restaurantIds = [String]
-    var restaurantIds = ["","","","","","","","","",""]
-    var restaurantNames = ["","","","","","","","","",""]
-    
-    var term = "ethiopian"
-    var location = "Toronto"
-    
+ 
     @IBOutlet weak var searchField: UITextField!
     
     @IBAction func searchButton(_ sender: UIBarButtonItem) {
         if searchField.text != nil || searchField.text != "" {
-            term = searchField.text!
+            data.term = searchField.text!
         }
         loadRestaurantIds()
+        //loadRestaurantReviews()
     }
     
     
@@ -50,59 +30,80 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         super.viewDidLoad()
         //var restaurantIds: Any
         loadRestaurantIds()
-        //loadRestaurantDetail()
-        //getToken()
-        //searchField.
- 
+         
     }
    
-    
     func loadRestaurantIds()  {
-        
-        Alamofire.request(urlP1+term+urlP2+location, headers: header).responseJSON { (responseData) -> Void in
+        Alamofire.request(data.urlP1+data.term+data.urlP2+data.location, headers: data.header).responseJSON { (responseData) -> Void in
             if((responseData.result.value) != nil) {
                 let swiftyJsonVar = JSON(responseData.result.value!)
                 for index in 0...9 {
-                    self.restaurantIds[index] = swiftyJsonVar["businesses"][index]["id"].stringValue
-                    self.restaurantNames[index] = swiftyJsonVar["businesses"][index]["name"].stringValue
-                   
+                    self.data.restaurantIds[index] = swiftyJsonVar["businesses"][index]["id"].stringValue
+                    self.data.restaurantNames[index] = swiftyJsonVar["businesses"][index]["name"].stringValue
+                    self.data.dat = swiftyJsonVar;
                 }
-                print(self.restaurantIds)
-                print(self.restaurantNames)
-                //self.tblJSON.reloadData()
+                print(self.data.restaurantIds)
+                print(self.data.restaurantNames)
+                self.loadRestaurantDetails()
                 self.tableView.reloadData()
             }
         }
     }
     
-    func loadResaurantInfo() {
-        
+    func loadRestaurantDetails() {
+        for index in 0...9 {
+            Alamofire.request(data.urlDetail+data.restaurantIds[index], headers: data.header).responseJSON { (responseData) -> Void in
+                if((responseData.result.value) != nil) {
+                    let swifty = JSON(responseData.result.value!)
+                    self.data.restaurantDetails[index] = swifty
+                    
+                    /*
+                    self.data.restaurants[index].name = swifty["name"].stringValue
+                    self.data.restaurants[index].pictures = swifty["photos"].arrayObject as! [String]
+                    self.data.restaurants[index].rating = swifty["rating"].intValue
+                    self.data.restaurants[index].price = swifty["price"].stringValue
+                    self.data.restaurants[index].address = swifty["photos"].stringValue
+                    self.data.restaurants[index].type = swifty["categories"][0]["title"].stringValue
+                    self.data.restaurants[index].lat = swifty["latitude"]
+                    self.data.restaurants[index].long = swifty["longitude"]
+                    */
+                    
+                    //let reviewCount = swifty["review_count"].stringValue
+                    //print("dfSDFSDFSDF\(index)")
+                    //print(reviewCount)
+                    //self.tblJSON.reloadData()
+                    //self.tableView.reloadData()
+                }
+                
+            }
+        }
+
     }
     
-    func loadRestaurantReview() {
+    func loadRestaurantReviews() {
         
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurantNames.count
+        return data.restaurantNames.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         //let restaurantName = restaurantNames[indexPath.row]
-        cell.textLabel?.text = restaurantNames[indexPath.row]
+        cell.textLabel?.text = data.restaurantNames[indexPath.row]
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
-            
+            vc.title = data.restaurantNames[indexPath.row]
+            //vc.pictures[indexPath.row] = data.restaurantDetails["photos"].stringValue
             // 3: now push it onto the navigation controller
             navigationController?.pushViewController(vc, animated: true)
         }
-        //let vc = DetailViewController()
-        //navigationController?.pushViewController(vc, animated: true)
+       
     }
  
     /*

@@ -1,24 +1,38 @@
 //
-//  DetailViewController.swift
+//  TitleViewController.swift
 //  BenYelpApp
 //
-//  Created by Ben Miller on 2017-01-23.
+//  Created by Ben Miller on 2017-01-24.
 //  Copyright © 2017 Ben Miller. All rights reserved.
 //
 
 import UIKit
 
-class DetailViewController: UIViewController, UITableViewDelegate {
+class TitleViewController: UIViewController {
+    
+    @IBOutlet weak var TitleLabel: UITextField!
+    @IBOutlet weak var butView: UIView!
+    @IBOutlet weak var Button: UIButton!
+    
+    
+    
+    @IBAction func SubmitTapped(_ sender: Any) {
+        if let tabView = storyboard?.instantiateViewController(withIdentifier: "Table") as? ViewController {
 
-    @IBOutlet weak var ReviewTable: UITableView!
-    var pictures: [String] = ["","","","","","","","","",""]
-    
-    
+            navigationController?.pushViewController(tabView, animated: true)
+        }
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
+        //hideButton()
         // Do any additional setup after loading the view.
+    }
+    
+    func hideButton() {
+        butView.isOpaque = true
+        Button.isOpaque = true
     }
 
     override func didReceiveMemoryWarning() {
