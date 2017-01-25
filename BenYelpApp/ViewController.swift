@@ -14,7 +14,8 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     var data = YelpData()
     
     
- 
+    var restaurants = [Restaurant](repeating: Restaurant(), count:10)
+    
     @IBOutlet weak var searchField: UITextField!
     
     @IBAction func searchButton(_ sender: UIBarButtonItem) {
@@ -30,17 +31,18 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         super.viewDidLoad()
         //var restaurantIds: Any
         loadRestaurantIds()
+        
          
     }
    
     func loadRestaurantIds()  {
         Alamofire.request(data.urlP1+data.term+data.urlP2+data.location, headers: data.header).responseJSON { (responseData) -> Void in
             if((responseData.result.value) != nil) {
-                let swiftyJsonVar = JSON(responseData.result.value!)
+                let jsonVar = JSON(responseData.result.value!)
                 for index in 0...9 {
-                    self.data.restaurantIds[index] = swiftyJsonVar["businesses"][index]["id"].stringValue
-                    self.data.restaurantNames[index] = swiftyJsonVar["businesses"][index]["name"].stringValue
-                    self.data.dat = swiftyJsonVar;
+                    self.data.restaurantIds[index] = jsonVar["businesses"][index]["id"].stringValue
+                    self.data.restaurantNames[index] = jsonVar["businesses"][index]["name"].stringValue
+                    self.data.dat = jsonVar;
                 }
                 print(self.data.restaurantIds)
                 print(self.data.restaurantNames)
@@ -51,12 +53,20 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     }
     
     func loadRestaurantDetails() {
+        
+        
+        
+        
+        
         for index in 0...9 {
             Alamofire.request(data.urlDetail+data.restaurantIds[index], headers: data.header).responseJSON { (responseData) -> Void in
                 if((responseData.result.value) != nil) {
-                    let swifty = JSON(responseData.result.value!)
-                    self.data.restaurantDetails[index] = swifty
+                    let jsonVar = JSON(responseData.result.value!)
+                    self.data.restaurantDetails[index] = jsonVar
+                    self.restaurants[index].updateInfo(json: jsonVar)
+                    self.loadRestaurantReviews()
                     
+                   
                     /*
                     self.data.restaurants[index].name = swifty["name"].stringValue
                     self.data.restaurants[index].pictures = swifty["photos"].arrayObject as! [String]
@@ -81,7 +91,21 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     }
     
     func loadRestaurantReviews() {
-        
+        for index in 0...9 {
+            Alamofire.request(data.urlDetail+data.restaurantIds[index]+data.urlReview, headers: data.header).responseJSON { (responseData) -> Void in
+                if((responseData.result.value) != nil) {
+                    let jsonVal = JSON(responseData.result.value!)
+                    self.restaurants[index].updateReviews(json: jsonVal)
+                    
+                    
+                    //let reviewCount = swifty["review_count"].stringValue
+                    //print("dfSDFSDFSDF\(index)")
+                    //print(reviewCount)
+                    //self.tblJSON.reloadData()
+                    //self.tableView.reloadData()
+                }
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,6 +123,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             vc.title = data.restaurantNames[indexPath.row]
+            vc.restDetail = restaurants[indexPath.row]
             //vc.pictures[indexPath.row] = data.restaurantDetails["photos"].stringValue
             // 3: now push it onto the navigation controller
             navigationController?.pushViewController(vc, animated: true)

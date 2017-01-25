@@ -9,29 +9,28 @@
 import UIKit
 
 class TitleViewController: UIViewController {
-    
-    @IBOutlet weak var TitleLabel: UITextField!
-    @IBOutlet weak var butView: UIView!
-    @IBOutlet weak var Button: UIButton!
-    
-    
-    
-    @IBAction func SubmitTapped(_ sender: Any) {
+    @IBAction func ButtonPressed(_ sender: UIButton) {
         if let tabView = storyboard?.instantiateViewController(withIdentifier: "Table") as? ViewController {
-
+            
             navigationController?.pushViewController(tabView, animated: true)
         }
-        
-        
     }
+    
+    @IBOutlet weak var Button: UIButton!
+    @IBOutlet weak var TitleLabel: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        Button.isHidden = false
+        if Button.isEnabled {
+            print("asdfa")
+        }
         //hideButton()
         // Do any additional setup after loading the view.
     }
     
     func hideButton() {
-        butView.isOpaque = true
         Button.isOpaque = true
     }
 
