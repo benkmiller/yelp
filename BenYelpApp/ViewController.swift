@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import AlamofireImage
 
 
 class ViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate{
@@ -51,13 +52,9 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             }
         }
     }
-    
+
     func loadRestaurantDetails() {
-        
-        
-        
-        
-        
+
         for index in 0...9 {
             Alamofire.request(data.urlDetail+data.restaurantIds[index], headers: data.header).responseJSON { (responseData) -> Void in
                 if((responseData.result.value) != nil) {
@@ -65,29 +62,11 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                     self.data.restaurantDetails[index] = jsonVar
                     self.restaurants[index].updateInfo(json: jsonVar)
                     self.loadRestaurantReviews()
-                    
-                   
-                    /*
-                    self.data.restaurants[index].name = swifty["name"].stringValue
-                    self.data.restaurants[index].pictures = swifty["photos"].arrayObject as! [String]
-                    self.data.restaurants[index].rating = swifty["rating"].intValue
-                    self.data.restaurants[index].price = swifty["price"].stringValue
-                    self.data.restaurants[index].address = swifty["photos"].stringValue
-                    self.data.restaurants[index].type = swifty["categories"][0]["title"].stringValue
-                    self.data.restaurants[index].lat = swifty["latitude"]
-                    self.data.restaurants[index].long = swifty["longitude"]
-                    */
-                    
-                    //let reviewCount = swifty["review_count"].stringValue
-                    //print("dfSDFSDFSDF\(index)")
-                    //print(reviewCount)
-                    //self.tblJSON.reloadData()
-                    //self.tableView.reloadData()
+
                 }
                 
             }
         }
-
     }
     
     func loadRestaurantReviews() {
@@ -96,13 +75,6 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                 if((responseData.result.value) != nil) {
                     let jsonVal = JSON(responseData.result.value!)
                     self.restaurants[index].updateReviews(json: jsonVal)
-                    
-                    
-                    //let reviewCount = swifty["review_count"].stringValue
-                    //print("dfSDFSDFSDF\(index)")
-                    //print(reviewCount)
-                    //self.tblJSON.reloadData()
-                    //self.tableView.reloadData()
                 }
             }
         }
@@ -130,15 +102,6 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         }
        
     }
- 
-    /*
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = DetailViewController()
-        //vc.detailItem = petitions[indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    */
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

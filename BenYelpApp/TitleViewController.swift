@@ -22,9 +22,12 @@ class TitleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Button.isHidden = false
-        if Button.isEnabled {
-            print("asdfa")
+        Button.isOpaque = true
+        if !TitleLabel.isEditing{
+            Button.isOpaque = true
+        }
+        else{
+            Button.isOpaque = false
         }
         //hideButton()
         // Do any additional setup after loading the view.

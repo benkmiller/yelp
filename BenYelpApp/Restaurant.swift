@@ -19,7 +19,7 @@ class Restaurant: NSObject {
         pictures = json["photos"].arrayObject as! [String]
         rating = json["rating"].intValue
         price = json["price"].stringValue
-        address = json["photos"].stringValue
+        address = json["location"]["address1"].stringValue
         type = json["categories"][0]["title"].stringValue
         phoneNum = json["phone"].stringValue
         lat = json["latitude"].doubleValue
