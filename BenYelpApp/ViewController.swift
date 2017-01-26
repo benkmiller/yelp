@@ -62,7 +62,6 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                     self.data.restaurantDetails[index] = jsonVar
                     self.restaurants[index].updateInfo(json: jsonVar)
                     self.loadRestaurantReviews()
-
                 }
                 
             }

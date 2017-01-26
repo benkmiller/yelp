@@ -9,11 +9,7 @@
 import UIKit
 
 class Restaurant: NSObject {
-    
-    //init(){
-        
-    //}
-    
+  
     func updateInfo(json: JSON){
         name = json["name"].stringValue
         pictures = json["photos"].arrayObject as! [String]
@@ -24,6 +20,8 @@ class Restaurant: NSObject {
         phoneNum = json["phone"].stringValue
         lat = json["latitude"].doubleValue
         long = json["longitude"].doubleValue
+        //reviewUrl = json[
+        
     }
     
     func updateReviews(json: JSON){
@@ -40,5 +38,7 @@ class Restaurant: NSObject {
     var phoneNum = ""
     var lat: Double = 0.0
     var long: Double = 0.0
+    var reviewUrl: String = ""
+    
 
 }

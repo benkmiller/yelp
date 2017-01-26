@@ -9,11 +9,12 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import WebKit
 
-class DetailViewController: UIViewController, UITableViewDelegate {
-    @IBOutlet weak var Img3: UIImageView!
-    @IBOutlet weak var Img2: UIImageView!
-    @IBOutlet weak var Img1: UIImageView!
+class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationDelegate {
+   // @IBOutlet weak var Img3: UIImageView!
+   // @IBOutlet weak var Img2: UIImageView!
+   // @IBOutlet weak var Img1: UIImageView!
 
     @IBOutlet weak var Details: UILabel!
     @IBOutlet weak var reviewView: UITextView!
@@ -22,7 +23,8 @@ class DetailViewController: UIViewController, UITableViewDelegate {
     
     
     
-    
+    var webView: WKWebView!
+
     var pictures: [String] = ["","","","","","","","","",""]
     var restDetail: Restaurant = Restaurant()
     var reviewString: String = ""
@@ -31,11 +33,22 @@ class DetailViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //In viewDidLoad, set button.imageView.contentMode to UIViewContentMode.ScaleAspectFill.
+        
+        
+        
         let catLine = " Category: "+restDetail.type+"\n"
         let addLine = " Address: "+restDetail.address+"\n"
         let priceLine = " Price: "+restDetail.price+"\n"
         let ratLine = " Avg Rating: "+String(restDetail.rating)+"\n"
         let revLine = " Phone Number: "+restDetail.phoneNum
+        
+        //let url = URL(string: restDetail.reviews["url"].stringValue)!
+        //webView.load(URLRequest(url: url))
+        //webView.allowsBackForwardNavigationGestures = true
+        
+        //Details Text
+        Details.text = catLine+addLine+priceLine+ratLine+revLine
         
         //Review Text
         for index in 0...2 {
@@ -45,10 +58,6 @@ class DetailViewController: UIViewController, UITableViewDelegate {
         }
         print(temp)
         reviewView.text = "Reviews (3): \n\n"+temp
-
-        //Details Text
-        Details.text = catLine+addLine+priceLine+ratLine+revLine
-        
         
         loadPics()
         //Img1.image = image1
@@ -56,7 +65,7 @@ class DetailViewController: UIViewController, UITableViewDelegate {
     }
     
     func loadPics() {
-        for index in 0...2 {
+        for index in 0...self.restDetail.pictures.count - 1 {
             Alamofire.request(self.restDetail.pictures[index]).responseImage { response in
                 debugPrint(response)
                 
@@ -66,18 +75,37 @@ class DetailViewController: UIViewController, UITableViewDelegate {
             
                 let image = response.result.value
                 if index == 0 {
-                    self.Img1.image = image!
+              //      self.Img1.image = image!
                 }
                 if index == 1 {
-                    self.Img2.image = image!
+                 //   self.Img2.image = image!
                 }
-                else {
-                    self.Img3.image = image!
+                if index == 2 {
+                //    self.Img3.image = image!
                 }
                 
             }
         }
     }
+    /*
+    override func loadView() {
+        webView = WKWebView()
+        webView.navigationDelegate = self
+        view = webView
+    }
+    
+    func openTapped() {
+        let ac = UIAlertController(title: "Open page…", message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "yelp.com", style: .default, handler: openPage))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(ac, animated: true)
+    }
+    
+    func openPage(action: UIAlertAction) {
+        let url = URL(string: restDetail.reviews["url"].stringValue)!
+        webView.load(URLRequest(url: url))
+    }
+    */
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
