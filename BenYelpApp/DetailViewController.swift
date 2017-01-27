@@ -15,6 +15,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
    // @IBOutlet weak var Img3: UIImageView!
    // @IBOutlet weak var Img2: UIImageView!
    // @IBOutlet weak var Img1: UIImageView!
+    @IBOutlet weak var But1: UIButton!
+    @IBOutlet weak var But2: UIButton!
+    @IBOutlet weak var But3: UIButton!
+    
+    
 
     @IBOutlet weak var Details: UILabel!
     @IBOutlet weak var reviewView: UITextView!
@@ -35,7 +40,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
         super.viewDidLoad()
         //In viewDidLoad, set button.imageView.contentMode to UIViewContentMode.ScaleAspectFill.
         
-        
+        But1.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        But2.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        But3.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
         let catLine = " Category: "+restDetail.type+"\n"
         let addLine = " Address: "+restDetail.address+"\n"
@@ -59,11 +66,19 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
         print(temp)
         reviewView.text = "Reviews (3): \n\n"+temp
         
-        loadPics()
+        setPics()
+        //loadPics()
         //Img1.image = image1
         
     }
     
+    func setPics() {
+        self.But1.setImage(restDetail.image1, for: .normal)
+        self.But2.setImage(restDetail.image2, for: .normal)
+        self.But3.setImage(restDetail.image3, for: .normal)
+    }
+    
+    /*
     func loadPics() {
         for index in 0...self.restDetail.pictures.count - 1 {
             Alamofire.request(self.restDetail.pictures[index]).responseImage { response in
@@ -75,18 +90,19 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
             
                 let image = response.result.value
                 if index == 0 {
-              //      self.Img1.image = image!
+                    self.But1.setImage(image!, for: .normal) //= image!
                 }
                 if index == 1 {
-                 //   self.Img2.image = image!
+                    self.But2.setImage(image!, for: .normal)
                 }
                 if index == 2 {
-                //    self.Img3.image = image!
+                    self.But3.setImage(image!, for: .normal)
                 }
                 
             }
         }
     }
+    */
     /*
     override func loadView() {
         webView = WKWebView()

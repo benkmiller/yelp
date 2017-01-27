@@ -21,19 +21,15 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     
     @IBAction func searchButton(_ sender: UIBarButtonItem) {
         if searchField.text != nil || searchField.text != "" {
-            data.term = searchField.text!
+            data.term = rewriteString(string: searchField.text!)
+            loadRestaurantIds()
         }
-        loadRestaurantIds()
-        //loadRestaurantReviews()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //var restaurantIds: Any
         loadRestaurantIds()
-        
-         
     }
    
     func loadRestaurantIds()  {
@@ -48,24 +44,49 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                 print(self.data.restaurantIds)
                 print(self.data.restaurantNames)
                 self.loadRestaurantDetails()
-                self.tableView.reloadData()
+                //self.tableView.reloadData()
             }
         }
     }
 
     func loadRestaurantDetails() {
-
         for index in 0...9 {
             Alamofire.request(data.urlDetail+data.restaurantIds[index], headers: data.header).responseJSON { (responseData) -> Void in
                 if((responseData.result.value) != nil) {
                     let jsonVar = JSON(responseData.result.value!)
                     self.data.restaurantDetails[index] = jsonVar
                     self.restaurants[index].updateInfo(json: jsonVar)
-                    self.loadRestaurantReviews()
                 }
-                
             }
         }
+        self.loadPics()
+    }
+    
+    func loadPics() {
+        for index in 0...9 {
+                Alamofire.request(self.restaurants[index].pictures[0]).responseImage { response in
+                    debugPrint(response)
+                
+                    let image = response.result.value
+                    //if index2 == 0{
+                    self.restaurants[index].image1 = image
+                    //}
+                    /*
+                    if index2 == 1{
+                        self.restaurants[index].image2 = image!
+                    }
+                    if index2 == 2{
+                        self.restaurants[index].image3 = image!
+                    }
+                    */
+                    if index == 9 {
+                        self.tableView.reloadData()
+                        self.loadRestaurantReviews()
+                    }
+                }
+            }
+        //self.tableView.reloadData()
+        //self.loadRestaurantReviews()
     }
     
     func loadRestaurantReviews() {
@@ -79,6 +100,12 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         }
     }
     
+    func rewriteString(string: String) -> String {
+        return string.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+    }
+    
+    
+    ////TABLE
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.restaurantNames.count
     }
@@ -87,6 +114,10 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         //let restaurantName = restaurantNames[indexPath.row]
         cell.textLabel?.text = data.restaurantNames[indexPath.row]
+        cell.imageView?.image = restaurants[indexPath.row].image1
+
+            //UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
+        //restaurants[indexPath.row].image1
         return cell
     }
     

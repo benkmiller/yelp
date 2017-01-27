@@ -28,10 +28,10 @@
                                     <constraint firstAttribute="height" constant="258" id="lKC-sL-5FK"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="adafasdf" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ssC-Ul-pRf">
-                                <rect key="frame" x="119" y="425" width="137" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Where to find food?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ssC-Ul-pRf">
+                                <rect key="frame" x="119" y="425" width="167" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="137" id="HOV-qy-LsH"/>
+                                    <constraint firstAttribute="width" constant="160" id="HOV-qy-LsH"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -76,17 +76,28 @@
         <scene sceneID="tFW-br-CHE">
             <objects>
                 <tableViewController storyboardIdentifier="Table" id="EiK-J8-te5" customClass="ViewController" customModule="BenYelpApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="i91-oe-gCZ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="63" sectionHeaderHeight="28" sectionFooterHeight="28" id="i91-oe-gCZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="UOQ-04-0GN">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" rowHeight="63" id="UOQ-04-0GN">
+                                <rect key="frame" x="0.0" y="28" width="375" height="63"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UOQ-04-0GN" id="e1r-2S-yBh">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UOQ-04-0GN" id="e1r-2S-yBh" userLabel="Content View1">
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="62"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Screen Shot 2017-01-23 at 8.19.32 PM" translatesAutoresizingMaskIntoConstraints="NO" id="2dY-s9-sOa">
+                                            <rect key="frame" x="20" y="0.0" width="66" height="44"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="2dY-s9-sOa" firstAttribute="leading" secondItem="e1r-2S-yBh" secondAttribute="leading" constant="20" id="DMS-9j-Ryx"/>
+                                        <constraint firstAttribute="trailing" secondItem="2dY-s9-sOa" secondAttribute="trailing" constant="256" id="Fu0-2w-QBD"/>
+                                        <constraint firstItem="2dY-s9-sOa" firstAttribute="top" secondItem="e1r-2S-yBh" secondAttribute="top" constant="5" id="G2U-np-SNE"/>
+                                        <constraint firstAttribute="bottom" secondItem="2dY-s9-sOa" secondAttribute="bottom" constant="5" id="s87-Xe-Vim"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -150,9 +161,12 @@
                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="okN-b3-mHH">
                                         <rect key="frame" x="0.0" y="0.0" width="312" height="152"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9b-mV-3iX">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9b-mV-3iX">
                                                 <rect key="frame" x="0.0" y="0.0" width="99.5" height="152"/>
-                                                <state key="normal" title="Button"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" title="Button">
+                                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZa-ti-bwP">
                                                 <rect key="frame" x="106.5" y="0.0" width="99" height="152"/>
@@ -203,6 +217,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="0KQ-cF-aTV"/>
                     <connections>
+                        <outlet property="But1" destination="j9b-mV-3iX" id="IwA-KR-Zez"/>
+                        <outlet property="But2" destination="ZZa-ti-bwP" id="xMg-Se-L6r"/>
+                        <outlet property="But3" destination="MDc-fc-x36" id="hmm-Bh-HDx"/>
                         <outlet property="Details" destination="qbd-GL-Ruc" id="cRv-UU-fau"/>
                         <outlet property="reviewView" destination="LDR-cm-5js" id="eT5-ta-c3U"/>
                     </connections>

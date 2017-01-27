@@ -20,8 +20,6 @@ class Restaurant: NSObject {
         phoneNum = json["phone"].stringValue
         lat = json["latitude"].doubleValue
         long = json["longitude"].doubleValue
-        //reviewUrl = json[
-        
     }
     
     func updateReviews(json: JSON){
@@ -39,6 +37,9 @@ class Restaurant: NSObject {
     var lat: Double = 0.0
     var long: Double = 0.0
     var reviewUrl: String = ""
+    var image1 = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
+    var image2 = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
+    var image3 = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
     
 
 }

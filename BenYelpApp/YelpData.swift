@@ -23,21 +23,7 @@ class YelpData: NSObject {
     
     var restaurantIds = ["","","","","","","","","",""]
     var restaurantNames = ["","","","","","","","","",""]
-    /*
-    var r1 = Restaurant()
-    var r2 = Restaurant()
-    var r3 = Restaurant()
-    var r4 = Restaurant()
-    var r5 = Restaurant()
-    var r6 = Restaurant()
-    var r7 = Restaurant()
-    var r8 = Restaurant()
-    var r9 = Restaurant()
-    var r10 = Restaurant()
-    */
-    //var restaurants = [r1,r2,r3,r4,r5,r6,r7,r8,r9,r10]
-    
-    
+       
     
     
     
