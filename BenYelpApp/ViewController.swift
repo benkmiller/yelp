@@ -31,7 +31,12 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadRestaurantIds()
+        for index in 0...9 {
+            print("******viewload restaurant data")
+            
+            print(restaurants[index].name)
+        }
+        //loadRestaurantIds()
     }
    
     func loadRestaurantIds()  {
@@ -139,7 +144,8 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         //name.text = data.restaurantNames[indexPath.row]
         //cell.imageView?.image = restaurants[indexPath.row].image1
         cell.name1.text = data.restaurantNames[indexPath.row]
-        cell.name2.text = String(restaurants[indexPath.row].rating)+"/5 Stars"
+        cell.name2.text = String(repeating: "★", count: Int(restaurants[indexPath.row].rating))
+        //cell.name2.text = String(restaurants[indexPath.row].rating)+"/5 Stars"
         cell.IView.image = restaurants[indexPath.row].image1
 
             //UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
