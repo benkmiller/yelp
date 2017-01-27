@@ -13,11 +13,13 @@ import AlamofireImage
 
 class ViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate{
     var data = YelpData()
-    
+       
     
     var restaurants = [Restaurant](repeating: Restaurant(), count:10)
     
     @IBOutlet weak var searchField: UITextField!
+    
+    
     
     @IBAction func searchButton(_ sender: UIBarButtonItem) {
         if searchField.text != nil || searchField.text != "" {
@@ -41,7 +43,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                     self.data.restaurantNames[index] = jsonVar["businesses"][index]["name"].stringValue
                     self.data.dat = jsonVar;
                 }
-                print(self.data.restaurantIds)
+                //print(self.data.restaurantIds)
                 print(self.data.restaurantNames)
                 self.loadRestaurantDetails()
                 //self.tableView.reloadData()
@@ -53,19 +55,37 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         for index in 0...9 {
             Alamofire.request(data.urlDetail+data.restaurantIds[index], headers: data.header).responseJSON { (responseData) -> Void in
                 if((responseData.result.value) != nil) {
+                    print("*********start load details")
+                    //debugPrint(responseData)
                     let jsonVar = JSON(responseData.result.value!)
+                    //print("*********************jsonprint")
+                    //print(jsonVar.stringValue)
                     self.data.restaurantDetails[index] = jsonVar
                     self.restaurants[index].updateInfo(json: jsonVar)
+                    //if index == 9 {
+                        //self.loadPics()
+                        self.tableView.reloadData()
+                        //self.loadRestaurantReviews()
+                        //for index2 in 0...9{
+                            print(self.restaurants[index].name)
+                        //    print(self.restaurants[index2].address)
+                        //}
+                    //}
                 }
             }
         }
-        self.loadPics()
+        //print("******after resquestsprint")
+        //for index3 in 0...9{
+        //    print(restaurants[index3].name+"asdfasdf")
+        //}
+        //self.loadPics()
     }
     
     func loadPics() {
         for index in 0...9 {
                 Alamofire.request(self.restaurants[index].pictures[0]).responseImage { response in
-                    debugPrint(response)
+                    //print("*********start load pics")
+                    //debugPrint(response)
                 
                     let image = response.result.value
                     //if index2 == 0{
@@ -84,7 +104,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                         self.loadRestaurantReviews()
                     }
                 }
-            }
+        }
         //self.tableView.reloadData()
         //self.loadRestaurantReviews()
     }
@@ -95,6 +115,9 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                 if((responseData.result.value) != nil) {
                     let jsonVal = JSON(responseData.result.value!)
                     self.restaurants[index].updateReviews(json: jsonVal)
+                    if index == 9 {
+                        
+                    }
                 }
             }
         }
@@ -111,10 +134,13 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell:CellClass = tableView.dequeueReusableCell(withIdentifier: "CellClass", for: indexPath) as! CellClass
         //let restaurantName = restaurantNames[indexPath.row]
-        cell.textLabel?.text = data.restaurantNames[indexPath.row]
-        cell.imageView?.image = restaurants[indexPath.row].image1
+        //name.text = data.restaurantNames[indexPath.row]
+        //cell.imageView?.image = restaurants[indexPath.row].image1
+        cell.name1.text = data.restaurantNames[indexPath.row]
+        cell.name2.text = String(restaurants[indexPath.row].rating)+"/5 Stars"
+        cell.IView.image = restaurants[indexPath.row].image1
 
             //UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
         //restaurants[indexPath.row].image1
