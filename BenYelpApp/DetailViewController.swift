@@ -14,8 +14,8 @@ import WebKit
 class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationDelegate {
     
     @IBOutlet weak var PhotoButton1: UIButton!
-    @IBOutlet weak var PhotoButton2: UIButton!
-    @IBOutlet weak var PhotoButton3: UIButton!
+    //@IBOutlet weak var PhotoButton2: UIButton!
+    //@IBOutlet weak var PhotoButton3: UIButton!
     
     @IBOutlet weak var MapsButton: UIButton!
     @IBOutlet weak var ReviewButton: UIButton!
@@ -46,12 +46,12 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
     
     func configureContent(){
         PhotoButton1.imageView?.contentMode = UIViewContentMode.scaleAspectFit
-        PhotoButton2.imageView?.contentMode = UIViewContentMode.scaleAspectFit
-        PhotoButton3.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        //PhotoButton2.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        //PhotoButton3.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
         PhotoButton1.layer.cornerRadius = 4
-        PhotoButton2.layer.cornerRadius = 4
-        PhotoButton3.layer.cornerRadius = 4
+        //PhotoButton2.layer.cornerRadius = 4
+        //PhotoButton3.layer.cornerRadius = 4
         
         MapsButton.backgroundColor = .clear
         MapsButton.layer.cornerRadius = 4

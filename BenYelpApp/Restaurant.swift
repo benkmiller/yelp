@@ -9,6 +9,9 @@
 import UIKit
 import MapKit
 
+
+
+
 class Restaurant: NSObject {
   
     func updateInfo(json: JSON){

@@ -112,13 +112,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;nameLabel&gt;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vki-j2-RqP">
                                                     <rect key="frame" x="0.0" y="0.0" width="102" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                    <color key="textColor" red="0.53492228138632103" green="0.37768769138869479" blue="0.21001539698584817" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" red="0.53492228138632103" green="0.37768769138869479" blue="0.17711066608307041" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;#stars&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9h-hC-Wfb">
                                                     <rect key="frame" x="0.0" y="19.5" width="58.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="0.91040382922535212" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.53492228138632103" green="0.37768769138869479" blue="0.17711066608307041" alpha="0.66906571061643838" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -126,7 +126,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="&lt;distance&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axc-pV-lVH">
                                             <rect key="frame" x="165" y="25" width="99" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="0.91040382919999996" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="0.672042313789041" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -334,18 +334,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="122"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Sj-Va-VHi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="111" height="122"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="122"/>
                                                         <state key="normal" title="Button">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RP8-3v-CWD">
-                                                        <rect key="frame" x="116" y="0.0" width="111" height="122"/>
-                                                        <state key="normal" title="Button"/>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1t9-Vh-3yo">
-                                                        <rect key="frame" x="232" y="0.0" width="111" height="122"/>
-                                                        <state key="normal" title="Button"/>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -443,8 +435,6 @@
                         <outlet property="Details" destination="9ww-kr-edS" id="bOo-6n-9Sc"/>
                         <outlet property="MapsButton" destination="3Ng-xa-C6p" id="zaw-oE-aBo"/>
                         <outlet property="PhotoButton1" destination="9Sj-Va-VHi" id="OsH-VM-pO7"/>
-                        <outlet property="PhotoButton2" destination="RP8-3v-CWD" id="8kQ-Te-501"/>
-                        <outlet property="PhotoButton3" destination="1t9-Vh-3yo" id="myi-Ci-t4S"/>
                         <outlet property="ReviewButton" destination="u5A-Bl-agz" id="gUV-uD-vGN"/>
                         <outlet property="reviewView" destination="5bj-SW-KeG" id="vZk-bJ-KF2"/>
                     </connections>
