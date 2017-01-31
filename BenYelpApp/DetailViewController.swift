@@ -25,8 +25,27 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
     var webView: WKWebView?
 
     var pictures: [String] = ["","","","","","","","","",""]
-    var restDetail: Restaurant = Restaurant()
-    var reviewString: String = ""
+    //var restDetail: Restaurant?
+    
+    /*
+    init (restDetailNew: Restaurant, imagesNew: ImageStruct, reviewsNew: Reviews){
+        restDetail = restDetailNew
+        images = imagesNew
+        reviews = reviewsNew
+        super.init(nibName: nil, bundle: nil)
+    }
+    */
+    
+    
+ 
+    
+    var restDetail: Restaurant?
+    var images: ImageStruct?
+    var reviews: Reviews?
+
+    
+    
+    var totalString: String = ""
     var temp = ""
     
     override func viewDidLoad() {
@@ -65,30 +84,38 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
     }
     
     func setPics() {
-        print("Image1: \(restDetail.image1)   ************")
-        PhotoButton1.setImage(restDetail.image1, for: .normal)
+        //print("Image1: \(restDetail.image1)   ************")
+        PhotoButton1.setImage(images?.image1, for: .normal)
         //PhotoButton2.setImage(restDetail.image2, for: .normal)
         //PhotoButton3.setImage(restDetail.image3, for: .normal)
     }
     
     func setReviews() {
         for index in 0...2 {
-            reviewString = "Author: "+restDetail.reviews["reviews"][index]["user"]["name"].stringValue+"\n"+"Time Created: "+restDetail.reviews["reviews"][index]["time_created"].stringValue+"\n"+"Rating: "+restDetail.reviews["reviews"][index]["rating"].stringValue+"/5 Stars\n\n"+restDetail.reviews["reviews"][index]["text"].stringValue+"\n\n"+"--------------------------\n\n"
+            let authorString = "Author: "+(reviews?.reviews["reviews"][index]["user"]["name"].stringValue)!+"\n"
             
+            let timeString = "Time Created: "+(reviews?.reviews["reviews"][index]["time_created"].stringValue)!+"\n"
+            let ratingString = "Rating: "+(reviews?.reviews["reviews"][index]["rating"].stringValue)!+"/5 Stars\n\n"
+            let reviewString = (reviews?.reviews["reviews"][index]["text"].stringValue)!+"\n\n"+"--------------------------\n\n"
+            
+            totalString = authorString+timeString+ratingString+reviewString
+            /*
+            TotalString = "Author: "+reviews.reviews["reviews"][index]["user"]["name"].stringValue+"\n"+"Time Created: "+reviews.reviews["reviews"][index]["time_created"].stringValue+"\n"+"Rating: "+reviews.reviews["reviews"][index]["rating"].stringValue+"/5 Stars\n\n"+reviews.reviews["reviews"][index]["text"].stringValue+"\n\n"+"--------------------------\n\n"
+            */
             temp += reviewString
         }
-        print("Author"+restDetail.reviews["reviews"][0]["user"]["name"].stringValue)
+        print("Author"+(reviews?.reviews["reviews"][0]["user"]["name"].stringValue)!)
         print(temp)
         reviewView.text = temp
 
     }
     
     func setDetails(){
-        let catLine = " Category: "+restDetail.type+"\n"
-        let addLine = " Address: "+restDetail.address+"\n"
-        let priceLine = " Price: "+restDetail.price+"\n"
-        let ratLine = " Avg Rating: "+String(repeating: "★", count: Int(restDetail.rating))+"\n"
-        let revLine = " Phone Number: "+restDetail.phoneNum
+        let catLine = " Category: "+(restDetail?.type)!+"\n"
+        let addLine = " Address: "+(restDetail?.address)!+"\n"
+        let priceLine = " Price: "+(restDetail?.price)!+"\n"
+        let ratLine = " Avg Rating: "+String(repeating: "★", count: Int((restDetail?.rating)!))+"\n"
+        let revLine = " Phone Number: "+(restDetail?.phoneNum)!
         Details.text = catLine+addLine+priceLine+ratLine+revLine
     }
 
@@ -97,8 +124,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
             //tabView.restaurants = self.restaurants
             //tabView.data = self.data
             print("I WA PRESSED")
-            mapView2.lat = restDetail.lat
-            mapView2.long = restDetail.long
+            mapView2.lat = restDetail?.lat
+            mapView2.long = restDetail?.long
             // mapView.
             navigationController?.pushViewController(mapView2, animated: true)
         }

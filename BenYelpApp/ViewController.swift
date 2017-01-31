@@ -68,7 +68,8 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                     let jsonVar = JSON(responseData.result.value!)
                     
                     self.data.restaurantDetails[index] = jsonVar
-                    self.data.restaurants[index].updateInfo(json: jsonVar)
+                    let newRestaurant = Restaurant(json: jsonVar)
+                    self.data.restaurants[index] = newRestaurant
                     cell.name2.text = String(repeating: "★", count: Int(self.data.restaurants[index].rating))
                     
                     print("*********loading details \(index)")
@@ -89,9 +90,9 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             Alamofire.request(self.data.restaurants[index].pictures[0]).responseImage { [unowned self] response in
                 //print("*********start load pics")
                 //debugPrint(response)
-                
                 let image = response.result.value
-                self.data.restaurants[index].image1 = image
+                let imageToSave = ImageStruct(image:image!)
+                self.data.images[index] = imageToSave
                 // print("Image: \(image)")
                 print("Printing Restaurants")
                 for index in 0...9 {
@@ -112,7 +113,8 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             Alamofire.request(data.urlDetail+data.restaurantIds[index]+data.urlReview, headers: data.header).responseJSON { [unowned self](responseData) -> Void in
                 if((responseData.result.value) != nil) {
                     let jsonVal = JSON(responseData.result.value!)
-                    self.data.restaurants[index].updateReviews(json: jsonVal)
+                    let newReview = Reviews(json: jsonVal)
+                    self.data.reviews[index] = newReview
                 }
             }
     }
@@ -193,8 +195,10 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             vc.title = data.restaurantNames[indexPath.row]
-            print("IMAGE::::   \(data.restaurants[indexPath.row].image1?.images)")
+            //print("IMAGE::::   \(data.restaurants[indexPath.row].image1?.images)")
             vc.restDetail = data.restaurants[indexPath.row]
+            vc.reviews = data.reviews[indexPath.row]
+            vc.images = data.images[indexPath.row]
             //vc.pictures[indexPath.row] = data.restaurantDetails["photos"].stringValue
             // 3: now push it onto the navigation controller
             navigationController?.pushViewController(vc, animated: true)

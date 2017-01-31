@@ -14,6 +14,8 @@ class YelpData: NSObject {
     
     
     var restaurants = [Restaurant](repeating: Restaurant(), count:10)
+    var reviews = [Reviews](repeating: Reviews(), count: 10)
+    var images = [ImageStruct](repeating: ImageStruct(), count: 10)
     let header: HTTPHeaders = [
         "Authorization": "Bearer FjlrPxjxGLStOinnoJ7wGK2W3GRMXXZmA_bPOOwFsktNC7tIMAcujcmUetfsRMY2_vdIanoVdoDS3iHctClh-k1UN_xmaZ_651dgbx9oChpC2U55yj7KRSSOVz6CWHYx"
     ]
