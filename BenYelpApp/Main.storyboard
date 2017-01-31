@@ -141,7 +141,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="IView" destination="wOE-yj-xSA" id="Wlc-mV-KeU"/>
+                                    <outlet property="IView" destination="wOE-yj-xSA" id="bU6-im-GqR"/>
                                     <outlet property="distanceLabel" destination="axc-pV-lVH" id="txs-1b-AAI"/>
                                     <outlet property="name1" destination="Vki-j2-RqP" id="W6j-8g-nmh"/>
                                     <outlet property="name2" destination="d9h-hC-Wfb" id="kQm-0j-ZkS"/>

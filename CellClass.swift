@@ -13,6 +13,7 @@ class CellClass: UITableViewCell {
     @IBOutlet weak var name2: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var IView: UIImageView!
+    
  
 
     override func awakeFromNib() {

@@ -12,6 +12,7 @@ import Alamofire
 class TitleViewController: UIViewController {
     
     var location: String?
+    var data = YelpData()
     
     @IBAction func ButtonPressed(_ sender: UIButton) {
         if let tabView = storyboard?.instantiateViewController(withIdentifier: "Table") as? ViewController {
@@ -20,7 +21,7 @@ class TitleViewController: UIViewController {
             //if TitleLabel.text != nil || TitleLabel.text != "" {
             //    tabView.data.location = tabView.rewriteString(string: TitleLabel.text!)
             //}
-            
+            tabView.data = data
             navigationController?.pushViewController(tabView, animated: true)
         }
     }
@@ -35,6 +36,8 @@ class TitleViewController: UIViewController {
         Button.layer.cornerRadius = 4
         Button.layer.borderWidth = 1
         Button.layer.borderColor = UIColor.red.cgColor
+        
+        loadRestaurantIds()
     }
     
     func hideButton() {
@@ -43,6 +46,23 @@ class TitleViewController: UIViewController {
         override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func loadRestaurantIds()  {
+        Alamofire.request(data.urlP1+data.term+data.urlP2+data.location, headers: data.header).responseJSON { [unowned self] (responseData) -> Void in
+            if((responseData.result.value) != nil) {
+                let jsonVar = JSON(responseData.result.value!)
+                for index in 0...9 {
+                    self.data.restaurantIds[index] = jsonVar["businesses"][index]["id"].stringValue
+                    self.data.restaurantNames[index] = jsonVar["businesses"][index]["name"].stringValue
+                    self.data.dat = jsonVar;
+                }
+                //print("Load Rest Ids:\(self.data.restaurantNames)")
+                //self.loadRestaurantDetails()
+                
+            }
+            //self.loadRestaurantDetails()
+        }
     }
     
     /*
