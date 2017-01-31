@@ -159,18 +159,23 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                     print("*********loading details \(index)")
                     print("Address:  "+self.restaurants[index].address)
                     print("Stars:    "+String(self.restaurants[index].rating))
+                    print(" imageUrl:  \(self.restaurants[index].pictures[0])")
+                    //cell.IView.image = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
+                    
+                    //cell.IView.downloadImageFrom(link: self.restaurants[index].pictures[0], contentMode: UIViewContentMode.scaleAspectFit)
+
                     
                     
                     
                     //self.tableView.reloadData()
-                    //self.loadPic(index: index, cell: cell)
+                    self.loadPic(index: index, cell: cell)
                  }
             }
         
     }
  
  
-    func loadPic(index: Int, cell:CellClass) {
+    func loadPic(index: Int, cell: CellClass) {
             Alamofire.request(self.restaurants[index].pictures[0]).responseImage { [unowned self] response in
                 //print("*********start load pics")
                 //debugPrint(response)
@@ -187,7 +192,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                 
                 
                 //self.tableView.reloadData()
-                    //self.loadRestaurantReviews()
+                self.loadRestaurantReview(index: index, cell: cell)
                 
             }
     }
@@ -202,56 +207,6 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             }
         
     }
-    
-    func loadRestaurantDetailChained(index: Int, cell: CellClass){
-        Alamofire.request(data.urlDetail+data.restaurantIds[index], headers: data.header).responseJSON { [unowned self](responseData) -> Void in
-            
-            if((responseData.result.value) != nil) {
-                
-                //debugPrint(responseData)
-                let jsonVar = JSON(responseData.result.value!)
-                
-                self.data.restaurantDetails[index] = jsonVar
-                self.restaurants[index].updateInfo(json: jsonVar)
-                //self.numCalls = self.numCalls + 1
-                //cell.name2.text = String(repeating: "★", count: Int(self.restaurants[index].rating))
-                
-                print("*********loading details \(index)")
-                print("Address:  "+self.restaurants[index].address)
-                print("Stars:    "+String(self.restaurants[index].rating))
-                
-                
-                    Alamofire.request(self.restaurants[index].pictures[0]).responseImage { [unowned self] response in
-                        //print("*********start load pics")
-                        //debugPrint(response)
-                        
-                        let image = response.result.value
-                        self.restaurants[index].image1 = image
-                        print("Image: \(image)")
-                        print("Printing Restaurants")
-                        for index in 0...9 {
-                            print(self.restaurants[index].name)
-                        }
-                        cell.name2.text = String(repeating: "★", count: Int(self.restaurants[index].rating))
-                        cell.IView.image = response.result.value
-                        //cell.IView.image =self.restaurants[index].image1
-                        
-                        
-                        //self.tableView.reloadData()
-                        //self.loadRestaurantReviews()
-                        
-                    }
-                
-                
-                
-                //self.tableView.reloadData()
-                //self.loadPic(index: index, cell: cell)
-            }
-        }
-        
-    }
-
-    
     
     
     /*
@@ -537,6 +492,8 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     
 
 }
+
+//not using right now
 extension UIImageView {
     func downloadImageFrom(link:String, contentMode: UIViewContentMode) {
         URLSession.shared.dataTask( with: NSURL(string:link)! as URL, completionHandler: {

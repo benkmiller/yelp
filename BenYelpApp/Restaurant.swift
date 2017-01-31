@@ -13,7 +13,7 @@ class Restaurant: NSObject {
   
     func updateInfo(json: JSON){
         name = json["name"].stringValue
-        //pictures = json["photos"].arrayObject as! [String]
+        pictures = json["photos"].arrayObject as! [String]
         rating = json["rating"].intValue
         price = json["price"].stringValue
         address = json["location"]["address1"].stringValue
