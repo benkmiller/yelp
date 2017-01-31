@@ -9,38 +9,51 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import MapKit
 
 
-class ViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate{
-    var data = YelpData()
-       
+class ViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate, CLLocationManagerDelegate{
     
     var restaurants = [Restaurant](repeating: Restaurant(), count:10)
+    var data = YelpData() //Instantiate Data Model
+    
+    //let locationManager = CLLocationManager()
     
     @IBOutlet weak var searchField: UITextField!
     
-    
-    
-    @IBAction func searchButton(_ sender: UIBarButtonItem) {
-        if searchField.text != nil || searchField.text != "" {
-            data.term = rewriteString(string: searchField.text!)
-            loadRestaurantIds()
-        }
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadRestaurantIds()
+        
         for index in 0...9 {
-            print("******viewload restaurant data")
-            
-            print(restaurants[index].name)
+            print("******viewload restaurant data \(index)")
+            print(" \(restaurants[index].name)")
         }
-        //loadRestaurantIds()
+        /*
+        // 2
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        // 3
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            locationManager.requestLocation()
+        }
+        */
     }
-   
+    
+    //TODO
+    func sortPageByRating(action: UIAlertAction) {
+        //var modifiedRestaurants:[Restaurant](repeating: Restaurant(), count:10)
+    }
+    
+    //TODO
+    func sortPageByDistance(action: UIAlertAction) {
+        //let url = URL(string: "https://" + action.title!)!
+        //webView.load(URLRequest(url: url))
+    }
+
     func loadRestaurantIds()  {
-        Alamofire.request(data.urlP1+data.term+data.urlP2+data.location, headers: data.header).responseJSON { (responseData) -> Void in
+        Alamofire.request(data.urlP1+data.term+data.urlP2+data.location, headers: data.header).responseJSON { [unowned self] (responseData) -> Void in
             if((responseData.result.value) != nil) {
                 let jsonVar = JSON(responseData.result.value!)
                 for index in 0...9 {
@@ -48,75 +61,194 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                     self.data.restaurantNames[index] = jsonVar["businesses"][index]["name"].stringValue
                     self.data.dat = jsonVar;
                 }
-                //print(self.data.restaurantIds)
-                print(self.data.restaurantNames)
+                print("Load Rest Ids:\(self.data.restaurantNames)")
                 self.loadRestaurantDetails()
-                //self.tableView.reloadData()
+
             }
+            //self.loadRestaurantDetails()
         }
     }
-
+    
+    
     func loadRestaurantDetails() {
         for index in 0...9 {
-            Alamofire.request(data.urlDetail+data.restaurantIds[index], headers: data.header).responseJSON { (responseData) -> Void in
+            Alamofire.request(data.urlDetail+data.restaurantIds[index], headers: data.header).responseJSON { [unowned self](responseData) -> Void in
+                
                 if((responseData.result.value) != nil) {
-                    print("*********start load details")
+                    
                     //debugPrint(responseData)
                     let jsonVar = JSON(responseData.result.value!)
-                    //print("*********************jsonprint")
-                    //print(jsonVar.stringValue)
+                    
                     self.data.restaurantDetails[index] = jsonVar
                     self.restaurants[index].updateInfo(json: jsonVar)
-                    //if index == 9 {
-                        //self.loadPics()
-                        self.tableView.reloadData()
-                        //self.loadRestaurantReviews()
-                        //for index2 in 0...9{
-                            print(self.restaurants[index].name)
-                        //    print(self.restaurants[index2].address)
-                        //}
-                    //}
+                    
+                    print("*********loading details \(index)")
+                    print("Address:  "+self.restaurants[index].address)
+                    print("Stars:    "+String(self.restaurants[index].rating))
+                    
+                    
+                    /*Distance
+                    var distance: [Double] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+                    distance[index] = self.locationManager.location?.distance(from: CLLocation(latitude: (self.restaurants[index].lat)?, longitude: (self.restaurants[index].long)? ))?
+                    self.data.restaurantDistances = distance
+                    */
+            
+                    if index == 9 {
+                        self.loadPics()
+                    }
                 }
             }
         }
-        //print("******after resquestsprint")
-        //for index3 in 0...9{
-        //    print(restaurants[index3].name+"asdfasdf")
-        //}
-        //self.loadPics()
     }
+    /*
+    func loadRestaurantDetailsMap() {
+        restaurants.map({
+            (restaurant: Restaurant) ->	Restaurant in
+            return (
+            
+            
+            Alamofire.request(data.urlDetail+data.restaurantIds[index], headers: data.header).responseJSON { [unowned self](responseData) -> Void in
+                
+                if((responseData.result.value) != nil) {
+                    
+                    //debugPrint(responseData)
+                    let jsonVar = JSON(responseData.result.value!)
+                    
+                    self.data.restaurantDetails[index] = jsonVar
+                    self.restaurants[index].updateInfo(json: jsonVar)
+                    
+                    print("*********loading details \(index)")
+                    print("Address:  "+self.restaurants[index].address)
+                    print("Stars:    "+String(self.restaurants[index].rating))
+                    
+                    
+                    /*Distance
+                     var distance: [Double] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+                     distance[index] = self.locationManager.location?.distance(from: CLLocation(latitude: (self.restaurants[index].lat)?, longitude: (self.restaurants[index].long)? ))?
+                     self.data.restaurantDistances = distance
+                     */
+                    
+                    if index == 9 {
+                        self.loadPics()
+                    }
+                }
+            }
+        
+    }
+    */
+   
+     
+    func loadRestaurantDetail(index: Int, cell: CellClass){
+            Alamofire.request(data.urlDetail+data.restaurantIds[index], headers: data.header).responseJSON { [unowned self](responseData) -> Void in
+                
+                if((responseData.result.value) != nil) {
+                    
+                    //debugPrint(responseData)
+                    let jsonVar = JSON(responseData.result.value!)
+                    
+                    self.data.restaurantDetails[index] = jsonVar
+                    self.restaurants[index].updateInfo(json: jsonVar)
+                    cell.name2.text = String(repeating: "★", count: Int(self.restaurants[index].rating))
+                    
+                    print("*********loading details \(index)")
+                    print("Address:  "+self.restaurants[index].address)
+                    print("Stars:    "+String(self.restaurants[index].rating))
+                    
+                    self.tableView.reloadData()
+                    //self.loadPic(index: index, cell: cell)
+                 }
+            }
+        
+    }
+ 
+ 
+    func loadPic(index: Int, cell:CellClass) {
+            Alamofire.request(self.restaurants[index].pictures[0]).responseImage { [unowned self] response in
+                //print("*********start load pics")
+                //debugPrint(response)
+                
+                let image = response.result.value
+                self.restaurants[index].image1 = image
+                cell.IView.image = self.restaurants[index].image1
+                
+                //self.tableView.reloadData()
+                    //self.loadRestaurantReviews()
+                
+            }
+    }
+    
+    
+    /*
+    func loadRestaurantDetails() {
+        for index in 0...9 {
+            
+        
+        
+        let queue = DispatchQueue(label: "com.cnoon.response-queue", qos: .utility, attributes: [.concurrent])
+        
+        Alamofire.request(data.urlDetail+data.restaurantIds[index], headers: data.header)
+            .response(
+                queue: queue,
+                responseSerializer: DataRequest.jsonResponseSerializer(),
+                completionHandler: { response in
+                    // You are now running on the concurrent `queue` you created earlier.
+                    print("Parsing JSON on thread: \(Thread.current) is main thread: \(Thread.isMainThread)")
+                    
+                    let jsonVar = JSON(response.result.value!)
+                    
+                    self.data.restaurantDetails[index] = jsonVar
+                    self.restaurants[index].updateInfo(json: jsonVar)
+                    
+                    print("*********loading details \(index)")
+                    print("Address:  "+self.restaurants[index].address)
+                    print("Stars:    "+String(self.restaurants[index].rating))
+                    // Validate your JSON response and convert into model objects if necessary
+                    print(response.result.value)
+                    
+                    // To update anything on the main thread, just jump back on like so.
+                    if index == 9 {
+                        DispatchQueue.main.async {
+                            print("Am I back on the main thread: \(Thread.isMainThread)")
+                        }
+                        self.loadPics()
+                    }
+            }
+        )
+        }
+    }
+    */
     
     func loadPics() {
         for index in 0...9 {
-                Alamofire.request(self.restaurants[index].pictures[0]).responseImage { response in
-                    //print("*********start load pics")
-                    //debugPrint(response)
+           
+            Alamofire.request(self.restaurants[index].pictures[0]).responseImage { [unowned self] response in
+                //print("*********start load pics")
+                //debugPrint(response)
                 
-                    let image = response.result.value
-                    //if index2 == 0{
+                let image = response.result.value
+                //if index2 == 0{
                     self.restaurants[index].image1 = image
-                    //}
-                    /*
-                    if index2 == 1{
-                        self.restaurants[index].image2 = image!
-                    }
-                    if index2 == 2{
-                        self.restaurants[index].image3 = image!
-                    }
-                    */
-                    if index == 9 {
-                        self.tableView.reloadData()
-                        self.loadRestaurantReviews()
-                    }
+                //}
+                /*
+                if index2 == 1{
+                    self.restaurants[index].image2 = image
                 }
+                if index2 == 2{
+                    self.restaurants[index].image3 = image
+                }
+                */
+                
+                if index == 9 {
+                    self.tableView.reloadData()
+                    self.loadRestaurantReviews()
+                }
+            }
         }
-        //self.tableView.reloadData()
-        //self.loadRestaurantReviews()
     }
     
     func loadRestaurantReviews() {
         for index in 0...9 {
-            Alamofire.request(data.urlDetail+data.restaurantIds[index]+data.urlReview, headers: data.header).responseJSON { (responseData) -> Void in
+            Alamofire.request(data.urlDetail+data.restaurantIds[index]+data.urlReview, headers: data.header).responseJSON { [unowned self](responseData) -> Void in
                 if((responseData.result.value) != nil) {
                     let jsonVal = JSON(responseData.result.value!)
                     self.restaurants[index].updateReviews(json: jsonVal)
@@ -127,10 +259,36 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             }
         }
     }
+
+    @IBAction func sortButton(_ sender: Any) {
+        let ac = UIAlertController(title: "Sort by...", message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Rating", style: .default, handler: sortPageByRating))
+        ac.addAction(UIAlertAction(title: "Distance", style: .default, handler: sortPageByDistance))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(ac, animated: true)
+        
+    }
     
+    @IBAction func searchButton(_ sender: UIBarButtonItem) {
+        if searchField.text != nil || searchField.text != "" {
+            data.term = rewriteString(string: searchField.text!)
+            loadRestaurantIds()
+        }
+    }
+
     func rewriteString(string: String) -> String {
         return string.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
     }
+    /*
+    func locationAuthStatus() {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            //map.showsUserLocation = true
+        }
+        else{
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    */
     
     
     ////TABLE
@@ -140,12 +298,14 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:CellClass = tableView.dequeueReusableCell(withIdentifier: "CellClass", for: indexPath) as! CellClass
-        //let restaurantName = restaurantNames[indexPath.row]
-        //name.text = data.restaurantNames[indexPath.row]
-        //cell.imageView?.image = restaurants[indexPath.row].image1
+
         cell.name1.text = data.restaurantNames[indexPath.row]
+        
+        //loadRestaurantDetail(index: indexPath.row, cell: cell)
+        
+        
         cell.name2.text = String(repeating: "★", count: Int(restaurants[indexPath.row].rating))
-        //cell.name2.text = String(restaurants[indexPath.row].rating)+"/5 Stars"
+        cell.distanceLabel.text = String(data.restaurantDistances[indexPath.row])
         cell.IView.image = restaurants[indexPath.row].image1
 
             //UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
@@ -157,6 +317,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             vc.title = data.restaurantNames[indexPath.row]
+            print("IMAGE::::   \(restaurants[indexPath.row].image1?.images)")
             vc.restDetail = restaurants[indexPath.row]
             //vc.pictures[indexPath.row] = data.restaurantDetails["photos"].stringValue
             // 3: now push it onto the navigation controller
@@ -170,7 +331,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         // Dispose of any resources that can be recreated.
     }
     
-    
+    /*
     func getToken() {
         
         // prepare json data
@@ -199,6 +360,98 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         task.resume()
         
     }
+    
+    
+     func loadRestaurantIds()  {
+     Alamofire.request(data.urlP1+data.term+data.urlP2+data.location, headers: data.header).responseJSON { (responseData) -> Void in
+     if((responseData.result.value) != nil) {
+     let jsonVar = JSON(responseData.result.value!)
+     for index in 0...9 {
+     self.data.restaurantIds[index] = jsonVar["businesses"][index]["id"].stringValue
+     self.data.restaurantNames[index] = jsonVar["businesses"][index]["name"].stringValue
+     self.data.dat = jsonVar;
+     }
+     //print(self.data.restaurantIds)
+     print(self.data.restaurantNames)
+     self.loadRestaurantDetails()
+     //self.tableView.reloadData()
+     }
+     }
+     }
+     
+     func loadRestaurantDetails() {
+     for index in 0...9 {
+     Alamofire.request(data.urlDetail+data.restaurantIds[index], headers: data.header).responseJSON { (responseData) -> Void in
+     if((responseData.result.value) != nil) {
+     print("*********start load details")
+     //debugPrint(responseData)
+     let jsonVar = JSON(responseData.result.value!)
+     //print("*********************jsonprint")
+     //print(jsonVar.stringValue)
+     self.data.restaurantDetails[index] = jsonVar
+     self.restaurants[index].updateInfo(json: jsonVar)
+     //if index == 9 {
+     //self.loadPics()
+     self.tableView.reloadData()
+     //self.loadRestaurantReviews()
+     //for index2 in 0...9{
+     print(self.restaurants[index].name)
+     //    print(self.restaurants[index2].address)
+     //}
+     //}
+     }
+     }
+     }
+     //print("******after resquestsprint")
+     //for index3 in 0...9{
+     //    print(restaurants[index3].name+"asdfasdf")
+     //}
+     //self.loadPics()
+     }
+     
+     func loadPics() {
+     for index in 0...9 {
+     Alamofire.request(self.restaurants[index].pictures[0]).responseImage { response in
+     //print("*********start load pics")
+     //debugPrint(response)
+     
+     let image = response.result.value
+     //if index2 == 0{
+     self.restaurants[index].image1 = image
+     //}
+     /*
+     if index2 == 1{
+     self.restaurants[index].image2 = image!
+     }
+     if index2 == 2{
+     self.restaurants[index].image3 = image!
+     }
+     */
+     if index == 9 {
+     self.tableView.reloadData()
+     self.loadRestaurantReviews()
+     }
+     }
+     }
+     //self.tableView.reloadData()
+     //self.loadRestaurantReviews()
+     }
+     
+     func loadRestaurantReviews() {
+     for index in 0...9 {
+     Alamofire.request(data.urlDetail+data.restaurantIds[index]+data.urlReview, headers: data.header).responseJSON { (responseData) -> Void in
+     if((responseData.result.value) != nil) {
+     let jsonVal = JSON(responseData.result.value!)
+     self.restaurants[index].updateReviews(json: jsonVal)
+     if index == 9 {
+     
+     }
+     }
+     }
+     }
+     }
+     */
+
 
     
 

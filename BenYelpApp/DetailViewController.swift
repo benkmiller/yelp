@@ -12,101 +12,107 @@ import AlamofireImage
 import WebKit
 
 class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationDelegate {
-   // @IBOutlet weak var Img3: UIImageView!
-   // @IBOutlet weak var Img2: UIImageView!
-   // @IBOutlet weak var Img1: UIImageView!
-    @IBOutlet weak var But1: UIButton!
-    @IBOutlet weak var But2: UIButton!
-    @IBOutlet weak var But3: UIButton!
     
+    @IBOutlet weak var PhotoButton1: UIButton!
+    @IBOutlet weak var PhotoButton2: UIButton!
+    @IBOutlet weak var PhotoButton3: UIButton!
     
-
+    @IBOutlet weak var MapsButton: UIButton!
+    @IBOutlet weak var ReviewButton: UIButton!
     @IBOutlet weak var Details: UILabel!
     @IBOutlet weak var reviewView: UITextView!
     
-    @IBOutlet weak var ReviewTable: UITableView!
-    
-    
-    
-    var webView: WKWebView!
+    var webView: WKWebView?
 
     var pictures: [String] = ["","","","","","","","","",""]
     var restDetail: Restaurant = Restaurant()
     var reviewString: String = ""
     var temp = ""
-    //var image1: UIImage
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //In viewDidLoad, set button.imageView.contentMode to UIViewContentMode.ScaleAspectFill.
-        
-        But1.imageView?.contentMode = UIViewContentMode.scaleAspectFit
-        But2.imageView?.contentMode = UIViewContentMode.scaleAspectFit
-        But3.imageView?.contentMode = UIViewContentMode.scaleAspectFit
-        
-        let catLine = " Category: "+restDetail.type+"\n"
-        let addLine = " Address: "+restDetail.address+"\n"
-        let priceLine = " Price: "+restDetail.price+"\n"
-        let ratLine = " Avg Rating: "+String(restDetail.rating)+"\n"
-        let revLine = " Phone Number: "+restDetail.phoneNum
         
         //let url = URL(string: restDetail.reviews["url"].stringValue)!
         //webView.load(URLRequest(url: url))
         //webView.allowsBackForwardNavigationGestures = true
         
-        //Details Text
-        Details.text = catLine+addLine+priceLine+ratLine+revLine
-        
-        //Review Text
-        for index in 0...2 {
-            reviewString = "Author: "+restDetail.reviews["reviews"][index]["user"]["name"].stringValue+"\n"+"Time Created: "+restDetail.reviews["reviews"][index]["time_created"].stringValue+"\n"+"Rating: "+restDetail.reviews["reviews"][index]["rating"].stringValue+"/5 Stars\n\n"+restDetail.reviews["reviews"][index]["text"].stringValue+"\n\n"+"--------------------------\n\n"
-        
-            temp += reviewString
-        }
-        print(temp)
-        reviewView.text = "Reviews (3): \n\n"+temp
-        
+        configureContent()
         setPics()
-        //loadPics()
-        //Img1.image = image1
+        setReviews()
+        setDetails()
         
+    
+    }
+    
+    func configureContent(){
+        PhotoButton1.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        PhotoButton2.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        PhotoButton3.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        
+        PhotoButton1.layer.cornerRadius = 4
+        PhotoButton2.layer.cornerRadius = 4
+        PhotoButton3.layer.cornerRadius = 4
+        
+        MapsButton.backgroundColor = .clear
+        MapsButton.layer.cornerRadius = 4
+        MapsButton.layer.borderWidth = 1
+        MapsButton.layer.borderColor = UIColor(netHex:0xFF8E79).cgColor
+        ReviewButton.backgroundColor = UIColor(netHex:0xFF8E79)
+        ReviewButton.layer.cornerRadius = 4
+        reviewView.layer.cornerRadius = 4
+        Details.layer.masksToBounds = true
+        Details.layer.cornerRadius = 4
     }
     
     func setPics() {
-        self.But1.setImage(restDetail.image1, for: .normal)
-        self.But2.setImage(restDetail.image2, for: .normal)
-        self.But3.setImage(restDetail.image3, for: .normal)
+        print("Image1: \(restDetail.image1)   ************")
+        PhotoButton1.setImage(restDetail.image1, for: .normal)
+        //PhotoButton2.setImage(restDetail.image2, for: .normal)
+        //PhotoButton3.setImage(restDetail.image3, for: .normal)
     }
     
-    /*
-    func loadPics() {
-        for index in 0...self.restDetail.pictures.count - 1 {
-            Alamofire.request(self.restDetail.pictures[index]).responseImage { response in
-                debugPrint(response)
-                
-                print(response.request)
-                print(response.response)
-                debugPrint(response.result)
+    func setReviews() {
+        for index in 0...2 {
+            reviewString = "Author: "+restDetail.reviews["reviews"][index]["user"]["name"].stringValue+"\n"+"Time Created: "+restDetail.reviews["reviews"][index]["time_created"].stringValue+"\n"+"Rating: "+restDetail.reviews["reviews"][index]["rating"].stringValue+"/5 Stars\n\n"+restDetail.reviews["reviews"][index]["text"].stringValue+"\n\n"+"--------------------------\n\n"
             
-                let image = response.result.value
-                if index == 0 {
-                    self.But1.setImage(image!, for: .normal) //= image!
-                }
-                if index == 1 {
-                    self.But2.setImage(image!, for: .normal)
-                }
-                if index == 2 {
-                    self.But3.setImage(image!, for: .normal)
-                }
-                
-            }
+            temp += reviewString
         }
+        print("Author"+restDetail.reviews["reviews"][0]["user"]["name"].stringValue)
+        print(temp)
+        reviewView.text = temp
+
     }
-    */
+    
+    func setDetails(){
+        let catLine = " Category: "+restDetail.type+"\n"
+        let addLine = " Address: "+restDetail.address+"\n"
+        let priceLine = " Price: "+restDetail.price+"\n"
+        let ratLine = " Avg Rating: "+String(repeating: "★", count: Int(restDetail.rating))+"\n"
+        let revLine = " Phone Number: "+restDetail.phoneNum
+        Details.text = catLine+addLine+priceLine+ratLine+revLine
+    }
+
+    @IBAction func MapsButtonPressed(_ sender: Any) {
+        if let mapView2 = storyboard?.instantiateViewController(withIdentifier: "mapView2") as? MapViewController {
+            //tabView.restaurants = self.restaurants
+            //tabView.data = self.data
+            print("I WA PRESSED")
+            mapView2.lat = restDetail.lat
+            mapView2.long = restDetail.long
+            // mapView.
+            navigationController?.pushViewController(mapView2, animated: true)
+        }
+        
+    }
+    
+    //@IBAction func ReviewButtonPressed(_ sender: Any) {
+        //loadView()
+        
+    //}
     /*
     override func loadView() {
         webView = WKWebView()
-        webView.navigationDelegate = self
+        webView?.navigationDelegate = self
         view = webView
     }
     
@@ -118,11 +124,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
     }
     
     func openPage(action: UIAlertAction) {
-        let url = URL(string: restDetail.reviews["url"].stringValue)!
-        webView.load(URLRequest(url: url))
+        let url = URL(string: restDetail.reviews[0]["url"].stringValue)!
+        webView?.load(URLRequest(url: url))
     }
     */
-
+ 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -132,3 +138,20 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
   
 
 }
+
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(netHex:Int) {
+        self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
+    }
+}
+
+

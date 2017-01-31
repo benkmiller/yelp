@@ -1,0 +1,2 @@
+look into making a data access singleton - shared instance
+make sure ur only getting data when u need to

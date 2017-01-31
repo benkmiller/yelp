@@ -11,6 +11,7 @@
 		D62BE6DB1E394C8E00C3AFE0 /* AlamofireImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D62BE6CD1E394BC800C3AFE0 /* AlamofireImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D62BE6DF1E3B202100C3AFE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D62BE6DE1E3B202100C3AFE0 /* Main.storyboard */; };
 		D62BE6E31E3B314D00C3AFE0 /* CellClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62BE6E21E3B314D00C3AFE0 /* CellClass.swift */; };
+		D6DC16471E3ED15C00A5E794 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DC16461E3ED15C00A5E794 /* MapViewController.swift */; };
 		D6E4F9291E326A7E00DC11AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F9281E326A7E00DC11AA /* AppDelegate.swift */; };
 		D6E4F92B1E326A7E00DC11AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F92A1E326A7E00DC11AA /* ViewController.swift */; };
 		D6E4F9301E326A7E00DC11AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6E4F92F1E326A7E00DC11AA /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 		D6E4F9611E37A2DE00DC11AA /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F9601E37A2DD00DC11AA /* TitleViewController.swift */; };
 		D6E4F9651E37D68200DC11AA /* YelpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F9641E37D68200DC11AA /* YelpData.swift */; };
 		D6E4F9671E37E37C00DC11AA /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F9661E37E37C00DC11AA /* Restaurant.swift */; };
+		D6E74A7E1E3F8FBE00E52007 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E74A7D1E3F8FBE00E52007 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +160,7 @@
 		D62BE6C01E394BC800C3AFE0 /* AlamofireImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AlamofireImage.xcodeproj; path = AlamofireImage/AlamofireImage.xcodeproj; sourceTree = SOURCE_ROOT; };
 		D62BE6DE1E3B202100C3AFE0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D62BE6E21E3B314D00C3AFE0 /* CellClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CellClass.swift; path = ../CellClass.swift; sourceTree = "<group>"; };
+		D6DC16461E3ED15C00A5E794 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = ../MapViewController.swift; sourceTree = "<group>"; };
 		D6E4F9251E326A7E00DC11AA /* BenYelpApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BenYelpApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6E4F9281E326A7E00DC11AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6E4F92A1E326A7E00DC11AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +173,7 @@
 		D6E4F9601E37A2DD00DC11AA /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		D6E4F9641E37D68200DC11AA /* YelpData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpData.swift; sourceTree = "<group>"; };
 		D6E4F9661E37E37C00DC11AA /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		D6E74A7D1E3F8FBE00E52007 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6E4F9531E32A6C800DC11AA /* Alamofire.framework in Frameworks */,
+				D6E74A7E1E3F8FBE00E52007 /* MapKit.framework in Frameworks */,
 				D62BE6DA1E394C8E00C3AFE0 /* AlamofireImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,6 +209,7 @@
 			children = (
 				D6E4F9271E326A7E00DC11AA /* BenYelpApp */,
 				D6E4F9261E326A7E00DC11AA /* Products */,
+				D6E74A7C1E3F8FBE00E52007 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -225,10 +231,11 @@
 				D6E4F9601E37A2DD00DC11AA /* TitleViewController.swift */,
 				D6E4F92A1E326A7E00DC11AA /* ViewController.swift */,
 				D6E4F95A1E364F9000DC11AA /* DetailViewController.swift */,
+				D6DC16461E3ED15C00A5E794 /* MapViewController.swift */,
 				D6E4F9641E37D68200DC11AA /* YelpData.swift */,
 				D6E4F9661E37E37C00DC11AA /* Restaurant.swift */,
-				D62BE6DE1E3B202100C3AFE0 /* Main.storyboard */,
 				D62BE6E21E3B314D00C3AFE0 /* CellClass.swift */,
+				D62BE6DE1E3B202100C3AFE0 /* Main.storyboard */,
 				D6E4F92F1E326A7E00DC11AA /* Assets.xcassets */,
 				D6E4F9311E326A7E00DC11AA /* LaunchScreen.storyboard */,
 				D6E4F9341E326A7E00DC11AA /* Info.plist */,
@@ -248,6 +255,14 @@
 				D6E4F9521E32A55100DC11AA /* Alamofire.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D6E74A7C1E3F8FBE00E52007 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D6E74A7D1E3F8FBE00E52007 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,6 +301,11 @@
 					D6E4F9241E326A7E00DC11AA = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -440,6 +460,7 @@
 				D6E4F9591E32B87800DC11AA /* SwiftyJSON.swift in Sources */,
 				D6E4F9651E37D68200DC11AA /* YelpData.swift in Sources */,
 				D6E4F92B1E326A7E00DC11AA /* ViewController.swift in Sources */,
+				D6DC16471E3ED15C00A5E794 /* MapViewController.swift in Sources */,
 				D6E4F9671E37E37C00DC11AA /* Restaurant.swift in Sources */,
 				D6E4F9291E326A7E00DC11AA /* AppDelegate.swift in Sources */,
 				D6E4F95B1E364F9000DC11AA /* DetailViewController.swift in Sources */,

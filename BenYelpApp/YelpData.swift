@@ -9,8 +9,11 @@
 import UIKit
 import Alamofire
 
-class YelpData: NSObject {
 
+class YelpData: NSObject {
+    
+    
+    //var restaurants = [Restaurant](repeating: Restaurant(), count:10)
     let header: HTTPHeaders = [
         "Authorization": "Bearer FjlrPxjxGLStOinnoJ7wGK2W3GRMXXZmA_bPOOwFsktNC7tIMAcujcmUetfsRMY2_vdIanoVdoDS3iHctClh-k1UN_xmaZ_651dgbx9oChpC2U55yj7KRSSOVz6CWHYx"
     ]
@@ -23,9 +26,7 @@ class YelpData: NSObject {
     
     var restaurantIds = ["","","","","","","","","",""]
     var restaurantNames = ["","","","","","","","","",""]
-       
-    
-    
+    var restaurantDistances = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
     
     var dat:JSON = [""]
     var restaurantDetails: JSON = [""]
