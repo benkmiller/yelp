@@ -18,6 +18,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     var data = YelpData() //Instantiate Data Model
     var userLocation: CLLocationCoordinate2D?
     let locationManager = CLLocationManager()
+    var reloadTableForSort = false
 
     
     @IBOutlet weak var searchField: UITextField!
@@ -207,6 +208,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     
     
     @IBAction func sortButton(_ sender: Any) {
+        reloadTableForSort = true
         let ac = UIAlertController(title: "Sort by...", message: nil, preferredStyle: .actionSheet)
         ac.addAction(UIAlertAction(title: "Rating", style: .default, handler: sortPageByRating))
         ac.addAction(UIAlertAction(title: "Distance", style: .default, handler: sortPageByDistance))
@@ -223,12 +225,16 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     }
     
     func sortPageByRating(action: UIAlertAction) {
-        filterList()
+        sortList()
     }
     
-    func filterList() { // should probably be called sort and not filter
-        data.restaurants.sort() { $0.rating > $1.rating } // sort the fruit by name
-        tableView.reloadData(); // notify the table view the data has changed
+    func sortList() {
+        data.restaurants.sort() { $0.rating > $1.rating }
+        for index in 0...9 {
+            print(data.restaurants[index].rating)
+        }
+        tableView.reloadData()
+        
     }
     
     
@@ -250,16 +256,27 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:CellClass = tableView.dequeueReusableCell(withIdentifier: "CellClass", for: indexPath) as! CellClass
-        cell.name1.text = data.restaurantNames[indexPath.row]
-        
-        //cell.IView.image = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
-        //cell.IView.downloadImageFrom(link: restaurants[indexPath.row].pictures[0], contentMode: UIViewContentMode.scaleAspectFit)
-        loadRestaurantDetail(index: indexPath.row, cell: cell)
-        //var getLat: CLLocationDegrees = latitude
-        //var getLon: CLLocationDegrees = centre.longitude
-       
-        //cell.distanceLabel.text = String(data.restaurantDistances[indexPath.row])
-        return cell
+        if reloadTableForSort == false{
+            cell.name1.text = data.restaurantNames[indexPath.row]
+            //cell.IView.image = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
+            //cell.IView.downloadImageFrom(link: restaurants[indexPath.row].pictures[0], contentMode: UIViewContentMode.scaleAspectFit)
+            loadRestaurantDetail(index: indexPath.row, cell: cell)
+            //var getLat: CLLocationDegrees = latitude
+            //var getLon: CLLocationDegrees = centre.longitude
+            //cell.distanceLabel.text = String(data.restaurantDistances[indexPath.row])
+            return cell
+        }
+        else {
+            cell.name1.text = data.restaurants[indexPath.row].name
+            cell.name2.text = String(repeating: "★", count: Int(self.data.restaurants[indexPath.row].rating))
+            cell.IView.contentMode = UIViewContentMode.scaleAspectFit
+            cell.IView.image = data.images[indexPath.row].image1
+
+            //cell.distanceLabel.text = String(describing: distance)
+            //REMEMBER TO CONFIGURE DISTANCE
+            //reloadTableForSort = false;
+            return cell
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -47,6 +47,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
         //PhotoButton2.layer.cornerRadius = 4
         //PhotoButton3.layer.cornerRadius = 4
         
+        
+        
         MapsButton.backgroundColor = .clear
         MapsButton.layer.cornerRadius = 4
         MapsButton.layer.borderWidth = 1
@@ -54,8 +56,12 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
         ReviewButton.backgroundColor = UIColor(netHex:0xFF8E79)
         ReviewButton.layer.cornerRadius = 4
         reviewView.layer.cornerRadius = 4
+        
+        //Details.backgroundColor = .clear
         Details.layer.masksToBounds = true
         Details.layer.cornerRadius = 4
+        //Details.layer.borderWidth = 1
+        //Details.layer.borderColor = UIColor(netHex:0xFF8E79).cgColor
     }
     
     func setPics() {
