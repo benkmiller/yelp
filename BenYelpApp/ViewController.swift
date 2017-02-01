@@ -25,10 +25,10 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     override func viewDidLoad() {
         super.viewDidLoad()
         //loadRestaurantIds()
-        // For use in foreground
-        self.locationManager.requestWhenInUseAuthorization()
-        locationManager.delegate = self
         
+        //self.locationManager.requestWhenInUseAuthorization()
+        //locationManager.delegate = self
+        //locationAuthStatus()
         //if CLLocationManager.locationServicesEnabled() {
         //    locationManager.delegate = self
         //    locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -42,6 +42,10 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         //    locationManager.requestLocation()
         //}
         
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        self.locationManager.requestWhenInUseAuthorization()
+        locationManager.delegate = self
     }
     
     func locationAuthStatus() {
@@ -85,6 +89,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                 
             if((responseData.result.value) != nil) {
                 //debugPrint(responseData)
+                
                 let jsonVar = JSON(responseData.result.value!)
                     
                 self.data.restaurantDetails[index] = jsonVar
@@ -111,6 +116,9 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                 //cell.IView.downloadImageFrom(link: self.restaurants[index].pictures[0], contentMode: UIViewContentMode.scaleAspectFit)
 
                 self.loadPic(index: index, cell: cell)
+            }
+            else {
+                print("ERROR: RESPONSE VAL NIL")
             }
         }
     }
@@ -167,19 +175,19 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     func loadPic(index: Int, cell: CellClass){
         Alamofire.request(self.data.restaurants[index].pictures[0]).responseImage { [unowned self] response in
             //print("*********start load pics")
-            
             //debugPrint(response)
-            let image = response.result.value
-            let imageToSave = ImageStruct(image:image!)
-            self.data.images[index] = imageToSave
-            
-            
-            cell.IView.contentMode = UIViewContentMode.scaleAspectFit
-            cell.IView.image = image
-            //cell.IView.image =self.restaurants[index].image1
-            //self.tableView.reloadData()
-            self.loadRestaurantReview(index: index, cell: cell)
-            
+            if let image = response.result.value{
+                let imageToSave = ImageStruct(image:image)
+                self.data.images[index] = imageToSave
+
+                cell.IView.contentMode = UIViewContentMode.scaleAspectFit
+                cell.IView.image = image
+                
+                self.loadRestaurantReview(index: index, cell: cell)
+            }
+            else{
+                print("ERROR LOADING PIC")
+            }
         }
         
     }
@@ -191,6 +199,9 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                 let newReview = Reviews(json: jsonVal)
                 self.data.reviews[index] = newReview
             }
+            else {
+                print("ERROR: RESPONSE VAL NIL")
+            }
         }
     }
     
@@ -201,14 +212,13 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         ac.addAction(UIAlertAction(title: "Distance", style: .default, handler: sortPageByDistance))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(ac, animated: true)
-        
     }
     
     @IBAction func searchButton(_ sender: UIBarButtonItem) {
-        if searchField.text != nil || searchField.text != "" {
+        if searchField.text != nil {
             data.term = rewriteString(string: searchField.text!)
             loadRestaurantIds()
-            //tableView.reloadData()
+            tableView.reloadData()
         }
     }
     

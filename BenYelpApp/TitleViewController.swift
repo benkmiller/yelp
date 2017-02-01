@@ -14,18 +14,6 @@ class TitleViewController: UIViewController {
     var location: String?
     var data = YelpData()
     
-    @IBAction func ButtonPressed(_ sender: UIButton) {
-        if let tabView = storyboard?.instantiateViewController(withIdentifier: "Table") as? ViewController {
-            //tabView.restaurants = self.restaurants
-            //tabView.data = self.data
-            if TitleLabel.text != nil && TitleLabel.text != ""{
-                data.location = tabView.rewriteString(string: TitleLabel.text!)
-            }
-            tabView.data = data
-            navigationController?.pushViewController(tabView, animated: true)
-        }
-    }
-    
     @IBOutlet weak var Button: UIButton!
     @IBOutlet weak var TitleLabel: UITextField!
     
@@ -40,12 +28,24 @@ class TitleViewController: UIViewController {
         loadRestaurantIds()
     }
     
-    func hideButton() {
-        Button.isOpaque = true
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        super.viewWillAppear(animated)
     }
-        override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        super.viewWillDisappear(animated)
+    }
+    
+    @IBAction func ButtonPressed(_ sender: UIButton) {
+        if let tabView = storyboard?.instantiateViewController(withIdentifier: "Table") as? ViewController {
+            if TitleLabel.text != nil && TitleLabel.text != ""{
+                data.location = tabView.rewriteString(string: TitleLabel.text!)
+            }
+            tabView.data = data
+            navigationController?.pushViewController(tabView, animated: true)
+        }
     }
     
     func loadRestaurantIds()  {
@@ -64,15 +64,9 @@ class TitleViewController: UIViewController {
             //self.loadRestaurantDetails()
         }
     }
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
-    */
-
 }

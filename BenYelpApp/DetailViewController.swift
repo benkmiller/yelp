@@ -22,18 +22,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
     @IBOutlet weak var Details: UILabel!
     @IBOutlet weak var reviewView: UITextView!
     
-    //var webView: WKWebView?
-    var pictures: [String] = ["","","","","","","","","",""]
-    
-    /*
-    init (restDetailNew: Restaurant, imagesNew: ImageStruct, reviewsNew: Reviews){
-        restDetail = restDetailNew
-        images = imagesNew
-        reviews = reviewsNew
-        super.init(nibName: nil, bundle: nil)
-    }
-     */
-
     var restDetail: Restaurant?
     var images: ImageStruct?
     var reviews: Reviews?
@@ -44,18 +32,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //let url = URL(string: restDetail.reviews["url"].stringValue)!
-        //webView.load(URLRequest(url: url))
-        //webView.allowsBackForwardNavigationGestures = true
-        //webView?.navigationDelegate = self
-        //view = webView
-        
         configureContent()
         setPics()
         setReviews()
         setDetails()
-        
-    
     }
     
     func configureContent(){
@@ -79,7 +59,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
     }
     
     func setPics() {
-        //print("Image1: \(restDetail.image1)   ************")
         PhotoButton1.setImage(images?.image1, for: .normal)
         //PhotoButton2.setImage(restDetail.image2, for: .normal)
         //PhotoButton3.setImage(restDetail.image3, for: .normal)
@@ -90,13 +69,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
             let authorString = "Author: "+(reviews?.reviews["reviews"][index]["user"]["name"].stringValue)!+"\n"
             
             let timeString = "Time Created: "+(reviews?.reviews["reviews"][index]["time_created"].stringValue)!+"\n"
-            let ratingString = "Rating: "+(reviews?.reviews["reviews"][index]["rating"].stringValue)!+"/5 Stars\n\n"
-            let reviewString = (reviews?.reviews["reviews"][index]["text"].stringValue)!+"\n\n"+"--------------------------\n\n"
+            let ratingString = "Rating: "+String(repeating: "★", count: Int((reviews?.reviews["reviews"][index]["rating"].stringValue)!)!)+"\n\n"
+            let reviewString = (reviews?.reviews["reviews"][index]["text"].stringValue)!+"\n\n"+"--------------------------------------------\n\n"
             
             totalString = authorString+timeString+ratingString+reviewString
-            /*
-            TotalString = "Author: "+reviews.reviews["reviews"][index]["user"]["name"].stringValue+"\n"+"Time Created: "+reviews.reviews["reviews"][index]["time_created"].stringValue+"\n"+"Rating: "+reviews.reviews["reviews"][index]["rating"].stringValue+"/5 Stars\n\n"+reviews.reviews["reviews"][index]["text"].stringValue+"\n\n"+"--------------------------\n\n"
-            */
             temp += totalString
         }
         print("Author"+(reviews?.reviews["reviews"][0]["user"]["name"].stringValue)!)
@@ -116,50 +92,34 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
 
     @IBAction func MapsButtonPressed(_ sender: Any) {
         if let mapView2 = storyboard?.instantiateViewController(withIdentifier: "mapView2") as? MapViewController {
-            //tabView.restaurants = self.restaurants
-            //tabView.data = self.data
-            print("I WA PRESSED")
             mapView2.lat = restDetail?.lat
             mapView2.long = restDetail?.long
             mapView2.restDetail = restDetail
-            // mapView.
             navigationController?.pushViewController(mapView2, animated: true)
         }
         
     }
-    /*
+    
     @IBAction func ReviewButtonPressed(_ sender: Any) {
-        loadView()
+        let vc = WebViewController()
+        
+        vc.urlToLoad = reviews?.reviews["reviews"][0]["url"].stringValue
+        navigationController?.pushViewController(vc, animated: true)
         
     }
-    
-    override func loadView() {
-        webView = WKWebView()
-        webView?.navigationDelegate = self
-        view = webView
-    }
-    
+    /*
     func openTapped() {
         let ac = UIAlertController(title: "Open page…", message: nil, preferredStyle: .actionSheet)
         ac.addAction(UIAlertAction(title: "yelp.com", style: .default, handler: openPage))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(ac, animated: true)
     }
-    
-    func openPage(action: UIAlertAction) {
-        let url = URL(string: (reviews?.reviews[0]["url"].stringValue)!)!
-        webView?.load(URLRequest(url: url))
-    }
     */
- 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-  
-
 }
 
 
