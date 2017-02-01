@@ -11,6 +11,7 @@
 		D62BE6DB1E394C8E00C3AFE0 /* AlamofireImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D62BE6CD1E394BC800C3AFE0 /* AlamofireImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D62BE6DF1E3B202100C3AFE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D62BE6DE1E3B202100C3AFE0 /* Main.storyboard */; };
 		D62BE6E31E3B314D00C3AFE0 /* CellClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62BE6E21E3B314D00C3AFE0 /* CellClass.swift */; };
+		D67B06211E4131D700D936AA /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B06201E4131D700D936AA /* MapAnnotation.swift */; };
 		D6DC16471E3ED15C00A5E794 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DC16461E3ED15C00A5E794 /* MapViewController.swift */; };
 		D6E4F9291E326A7E00DC11AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F9281E326A7E00DC11AA /* AppDelegate.swift */; };
 		D6E4F92B1E326A7E00DC11AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F92A1E326A7E00DC11AA /* ViewController.swift */; };
@@ -160,6 +161,7 @@
 		D62BE6C01E394BC800C3AFE0 /* AlamofireImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AlamofireImage.xcodeproj; path = AlamofireImage/AlamofireImage.xcodeproj; sourceTree = SOURCE_ROOT; };
 		D62BE6DE1E3B202100C3AFE0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D62BE6E21E3B314D00C3AFE0 /* CellClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CellClass.swift; path = ../CellClass.swift; sourceTree = "<group>"; };
+		D67B06201E4131D700D936AA /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		D6DC16461E3ED15C00A5E794 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = ../MapViewController.swift; sourceTree = "<group>"; };
 		D6E4F9251E326A7E00DC11AA /* BenYelpApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BenYelpApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6E4F9281E326A7E00DC11AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				D6E4F92A1E326A7E00DC11AA /* ViewController.swift */,
 				D6E4F95A1E364F9000DC11AA /* DetailViewController.swift */,
 				D6DC16461E3ED15C00A5E794 /* MapViewController.swift */,
+				D67B06201E4131D700D936AA /* MapAnnotation.swift */,
 				D6E4F9641E37D68200DC11AA /* YelpData.swift */,
 				D6E4F9661E37E37C00DC11AA /* Restaurant.swift */,
 				D62BE6E21E3B314D00C3AFE0 /* CellClass.swift */,
@@ -457,6 +460,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D62BE6E31E3B314D00C3AFE0 /* CellClass.swift in Sources */,
+				D67B06211E4131D700D936AA /* MapAnnotation.swift in Sources */,
 				D6E4F9591E32B87800DC11AA /* SwiftyJSON.swift in Sources */,
 				D6E4F9651E37D68200DC11AA /* YelpData.swift in Sources */,
 				D6E4F92B1E326A7E00DC11AA /* ViewController.swift in Sources */,

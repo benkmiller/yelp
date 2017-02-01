@@ -92,7 +92,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="71"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UOQ-04-0GN" id="e1r-2S-yBh">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="70"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="70.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="london-thumb" translatesAutoresizingMaskIntoConstraints="NO" id="wOE-yj-xSA">
@@ -221,10 +221,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6MS-Hb-X6o">
-                                        <rect key="frame" x="0.0" y="162" width="312" height="60"/>
+                                        <rect key="frame" x="0.0" y="162" width="312" height="60.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="350" verticalCompressionResistancePriority="600" ambiguous="YES" text="Labelajsdflkasjdf;a lksjdf; lkasjdf;lk ajsdf;lk jasd;kl fjsldkfjlsdkj flskdjflkjsdlkfjsldkjfl ksjdlfkj sdlk" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbd-GL-Ruc">
-                                                <rect key="frame" x="0.0" y="0.0" width="312" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="312" height="60.5"/>
                                                 <color key="backgroundColor" red="0.93306751939999999" green="0.1108020222" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" red="0.98308201370000003" green="1" blue="0.98139096020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -234,16 +234,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="enY-cj-Stc">
-                                        <rect key="frame" x="0.0" y="239" width="312" height="338"/>
+                                        <rect key="frame" x="0.0" y="239.5" width="312" height="337.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="500" verticalCompressionResistancePriority="755" ambiguous="YES" text="Reviews(3): " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QL1-wY-2ZD">
-                                                <rect key="frame" x="0.0" y="0.0" width="312" height="25"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="312" height="24.5"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="350" verticalCompressionResistancePriority="501" ambiguous="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDR-cm-5js">
-                                                <rect key="frame" x="0.0" y="27" width="312" height="311"/>
+                                                <rect key="frame" x="0.0" y="26.5" width="312" height="311"/>
                                                 <color key="backgroundColor" red="0.93306751939999999" green="0.1108020222" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <color key="textColor" red="0.98308201365589332" green="1" blue="0.98139096016967264" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -324,17 +324,17 @@
                                     <constraint firstAttribute="height" constant="50" id="nuZ-VI-Z8k"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="1Dk-PE-OOh">
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1Dk-PE-OOh">
                                 <rect key="frame" x="22" y="85" width="343" height="517"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="Pf0-AB-Fkq">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="251"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Pf0-AB-Fkq">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="256"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DOw-ee-oTY">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="122"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="125"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Sj-Va-VHi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="122"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="125"/>
                                                         <state key="normal" title="Button">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
@@ -342,19 +342,19 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v7Z-j8-dnx">
-                                                <rect key="frame" x="0.0" y="129" width="343" height="122"/>
+                                                <rect key="frame" x="0.0" y="131" width="343" height="125"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2vV-V9-YnY">
-                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="122"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="125"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpk-Hy-fKY">
-                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="28.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ww-kr-edS">
-                                                                <rect key="frame" x="0.0" y="28.5" width="343" height="93.5"/>
+                                                                <rect key="frame" x="0.0" y="31.5" width="343" height="93.5"/>
                                                                 <color key="backgroundColor" red="1" green="0.5568627451" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <string key="text">qweofiwjefoiwejfowiejfow wfoi wjefwio jwfoiwje oifjw oeijfoi wej oije ofiwjeoi jfo weijfoijw qweofiwjefoiwejfowiejfow wfoi wjefwio jwfoiwje oifjw oeijfoi wej oijefoiwe qweofiwjefoiwejfowiejfow wfoi wjefwio jwfoiwje oifjw oeijfoi wej oije ofiwjeoi jfo weijfoijw</string>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
@@ -368,7 +368,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="7fm-0U-50D">
-                                        <rect key="frame" x="0.0" y="266" width="343" height="251"/>
+                                        <rect key="frame" x="0.0" y="261" width="343" height="256"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reviews: (3)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guN-vV-Fgo">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="21.5"/>
@@ -377,7 +377,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="700" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5bj-SW-KeG">
-                                                <rect key="frame" x="0.0" y="24.5" width="343" height="226.5"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="343" height="231.5"/>
                                                 <color key="backgroundColor" red="1" green="0.55686274509803924" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -18,6 +18,8 @@ class CellClass: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        IView.layer.cornerRadius = 4
         // Initialization code
     }
 

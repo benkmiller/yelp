@@ -10,35 +10,56 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import MapKit
+import CoreLocation
 
 
 class ViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate, CLLocationManagerDelegate{
     
-    //var restaurants = [Restaurant](repeating: Restaurant(), count:10)
     var data = YelpData() //Instantiate Data Model
-    
-    //let locationManager = CLLocationManager()
+    var userLocation: CLLocationCoordinate2D?
+    let locationManager = CLLocationManager()
+
     
     @IBOutlet weak var searchField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //loadRestaurantIds()
-        
-        for index in 0...9 {
-            print("******viewload restaurant data \(index)")
-            print(" \(data.restaurants[index].name)")
-        }
-        /*
-        // 2
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
+        
+        //if CLLocationManager.locationServicesEnabled() {
+        //    locationManager.delegate = self
+        //    locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        //    locationManager.startUpdatingLocation()
+        //
+        //}
+        
         // 3
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        //if CLLocationManager.locationServicesEnabled() {
+        //    locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        //    locationManager.requestLocation()
+        //}
+        
+    }
+    
+    func locationAuthStatus() {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            //map.showsUserLocation = true
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.requestLocation()
+            //locationManager.startUpdatingLocation()
         }
-        */
+        else{
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //var locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        //userLocation = locValue
+        //print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
     
     func loadRestaurantIds()  {
@@ -60,63 +81,117 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     }
     
     func loadRestaurantDetail(index: Int, cell: CellClass){
-            Alamofire.request(data.urlDetail+data.restaurantIds[index], headers: data.header).responseJSON { [unowned self](responseData) -> Void in
+        Alamofire.request(data.urlDetail+data.restaurantIds[index], headers: data.header).responseJSON { [unowned self](responseData) -> Void in
                 
-                if((responseData.result.value) != nil) {
+            if((responseData.result.value) != nil) {
+                //debugPrint(responseData)
+                let jsonVar = JSON(responseData.result.value!)
                     
-                    //debugPrint(responseData)
-                    let jsonVar = JSON(responseData.result.value!)
+                self.data.restaurantDetails[index] = jsonVar
+                /*
+                let distance = self.locationManager.location?.distance(from: CLLocation(latitude: jsonVar["coordinates"]["latitude"].doubleValue, longitude: jsonVar["coordinates"]["longitude"].doubleValue))
+                let newRestaurant = Restaurant(json: jsonVar, calculatedDistance: distance!){
+                self.data.restaurants[index] = newRestaurant
+                */
+                let newRestaurant = Restaurant(json: jsonVar)
+                self.data.restaurants[index] = newRestaurant
+                let distance = self.locationManager.location?.distance(from: CLLocation(latitude: newRestaurant.lat!, longitude: newRestaurant.long!))
+                //let dist: CLLocationDistance = self.locationManager.location.distanceFr
+                
+                cell.name2.text = String(repeating: "★", count: Int(self.data.restaurants[index].rating))
+                cell.distanceLabel.text = String(describing: distance)
                     
-                    self.data.restaurantDetails[index] = jsonVar
-                    let newRestaurant = Restaurant(json: jsonVar)
-                    self.data.restaurants[index] = newRestaurant
-                    cell.name2.text = String(repeating: "★", count: Int(self.data.restaurants[index].rating))
-                    
-                    print("*********loading details \(index)")
-                    print("Address:  "+self.data.restaurants[index].address)
-                    print("Stars:    "+String(self.data.restaurants[index].rating))
-                    print(" imageUrl:  \(self.data.restaurants[index].pictures[0])")
-                    //cell.IView.image = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
-                    //cell.IView.downloadImageFrom(link: self.restaurants[index].pictures[0], contentMode: UIViewContentMode.scaleAspectFit)
+                print("*********loading details \(index)")
+                print("Address:  "+self.data.restaurants[index].address)
+                print("Stars:    "+String(self.data.restaurants[index].rating))
+                print(" imageUrl:  \(self.data.restaurants[index].pictures[0])")
+                print(" latitude of user: \(self.locationManager.location?.coordinate.latitude)")
+                print(" longitude of user: \(self.locationManager.location?.coordinate.longitude)")
+                //cell.IView.image = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
+                //cell.IView.downloadImageFrom(link: self.restaurants[index].pictures[0], contentMode: UIViewContentMode.scaleAspectFit)
 
-                    self.loadPic(index: index, cell: cell)
-                 }
+                self.loadPic(index: index, cell: cell)
             }
+        }
+    }
+ /*
+    func loadPics(index: Int, cell: CellClass) {
+            Alamofire.request(self.data.restaurants[index].pictures[0]).responseImage { [unowned self] response in
+                //print("*********start load pics")
+                
+                //debugPrint(response)
+                let image = response.result.value
+                let imageToSave = ImageStruct(images:image!)
+                
+                Alamofire.request(self.data.restaurants[index].pictures[1]).responseImage { [unowned self] response2 in
+                    //print("*********start load pics")
+                    
+                    //debugPrint(response)
+                    let image2 = response2.result.value
+                    let imageToSave = ImageStruct(images:image!)
+                                       
+                    
+                    Alamofire.request(self.data.restaurants[index].pictures[2]).responseImage { [unowned self] response in
+                        //print("*********start load pics")
+                        
+                        //debugPrint(response)
+                        let image3 = response.result.value
+                        let imageToSave = ImageStruct(images:image!)
+                        self.data.images[index] = imageToSave
+                        
+                        
+                        cell.IView.contentMode = UIViewContentMode.scaleAspectFit
+                        cell.IView.image = image
+                        //cell.IView.image =self.restaurants[index].image1
+                        //self.tableView.reloadData()
+                        self.loadRestaurantReview(index: index, cell: cell)
+                        //print("Printing Restaurants")
+                        // for index in 0...9 {
+                        //    print(self.data.restaurants[index].name)
+                        //}
+                        
+                    }
+                }
+                
+                
+                self.loadRestaurantReview(index: index, cell: cell)
+                //print("Printing Restaurants")
+                // for index in 0...9 {
+                //    print(self.data.restaurants[index].name)
+                //}
+                
+            }
+    }
+ */
+    
+    func loadPic(index: Int, cell: CellClass){
+        Alamofire.request(self.data.restaurants[index].pictures[0]).responseImage { [unowned self] response in
+            //print("*********start load pics")
+            
+            //debugPrint(response)
+            let image = response.result.value
+            let imageToSave = ImageStruct(image:image!)
+            self.data.images[index] = imageToSave
+            
+            
+            cell.IView.contentMode = UIViewContentMode.scaleAspectFit
+            cell.IView.image = image
+            //cell.IView.image =self.restaurants[index].image1
+            //self.tableView.reloadData()
+            self.loadRestaurantReview(index: index, cell: cell)
+            
+        }
         
     }
  
- 
-    func loadPic(index: Int, cell: CellClass) {
-            Alamofire.request(self.data.restaurants[index].pictures[0]).responseImage { [unowned self] response in
-                //print("*********start load pics")
-                //debugPrint(response)
-                let image = response.result.value
-                let imageToSave = ImageStruct(image:image!)
-                self.data.images[index] = imageToSave
-                // print("Image: \(image)")
-                print("Printing Restaurants")
-                for index in 0...9 {
-                    print(self.data.restaurants[index].name)
-                }
-                cell.IView.contentMode = UIViewContentMode.scaleAspectFit
-                cell.IView.image = image
-                //cell.IView.image =self.restaurants[index].image1
-                
-                
-                //self.tableView.reloadData()
-                self.loadRestaurantReview(index: index, cell: cell)
-                
-            }
-    }
-    
     func loadRestaurantReview(index:Int, cell:CellClass) {
-            Alamofire.request(data.urlDetail+data.restaurantIds[index]+data.urlReview, headers: data.header).responseJSON { [unowned self](responseData) -> Void in
-                if((responseData.result.value) != nil) {
-                    let jsonVal = JSON(responseData.result.value!)
-                    let newReview = Reviews(json: jsonVal)
-                    self.data.reviews[index] = newReview
-                }
+        Alamofire.request(data.urlDetail+data.restaurantIds[index]+data.urlReview, headers: data.header).responseJSON { [unowned self](responseData) -> Void in
+            if((responseData.result.value) != nil) {
+                let jsonVal = JSON(responseData.result.value!)
+                let newReview = Reviews(json: jsonVal)
+                self.data.reviews[index] = newReview
             }
+        }
     }
     
     
@@ -137,16 +212,15 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         }
     }
     
-    //TODO
     func sortPageByRating(action: UIAlertAction) {
-        //filterList()
+        filterList()
     }
-    /*
-     func filterList() { // should probably be called sort and not filter
-     tableView.visibleCells.sort() { $0.rating > $1.rating } // sort the fruit by name
-     tableView.reloadData(); // notify the table view the data has changed
-     }
-     */
+    
+    func filterList() { // should probably be called sort and not filter
+        data.restaurants.sort() { $0.rating > $1.rating } // sort the fruit by name
+        tableView.reloadData(); // notify the table view the data has changed
+    }
+    
     
     //TODO
     func sortPageByDistance(action: UIAlertAction) {
@@ -157,37 +231,24 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     func rewriteString(string: String) -> String {
         return string.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
     }
-    /*
-    func locationAuthStatus() {
-        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-            //map.showsUserLocation = true
-        }
-        else{
-            locationManager.requestWhenInUseAuthorization()
-        }
-    }
-    */
+    
     
     ////TABLE
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return numCalls
         return data.restaurantNames.count
-        //return data.restaurants
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:CellClass = tableView.dequeueReusableCell(withIdentifier: "CellClass", for: indexPath) as! CellClass
-
         cell.name1.text = data.restaurantNames[indexPath.row]
         
         //cell.IView.image = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
         //cell.IView.downloadImageFrom(link: restaurants[indexPath.row].pictures[0], contentMode: UIViewContentMode.scaleAspectFit)
         loadRestaurantDetail(index: indexPath.row, cell: cell)
-        
-        //cell.name2.text = String(repeating: "★", count: Int(restaurants[indexPath.row].rating))
-        cell.distanceLabel.text = String(data.restaurantDistances[indexPath.row])
-        //cell.IView.image = restaurants[indexPath.row].image1
-
+        //var getLat: CLLocationDegrees = latitude
+        //var getLon: CLLocationDegrees = centre.longitude
+       
+        //cell.distanceLabel.text = String(data.restaurantDistances[indexPath.row])
         return cell
     }
     
@@ -195,12 +256,10 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             vc.title = data.restaurantNames[indexPath.row]
-            //print("IMAGE::::   \(data.restaurants[indexPath.row].image1?.images)")
             vc.restDetail = data.restaurants[indexPath.row]
             vc.reviews = data.reviews[indexPath.row]
             vc.images = data.images[indexPath.row]
-            //vc.pictures[indexPath.row] = data.restaurantDetails["photos"].stringValue
-            // 3: now push it onto the navigation controller
+            
             navigationController?.pushViewController(vc, animated: true)
         }
        

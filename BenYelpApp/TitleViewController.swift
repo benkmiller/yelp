@@ -18,9 +18,9 @@ class TitleViewController: UIViewController {
         if let tabView = storyboard?.instantiateViewController(withIdentifier: "Table") as? ViewController {
             //tabView.restaurants = self.restaurants
             //tabView.data = self.data
-            //if TitleLabel.text != nil || TitleLabel.text != "" {
-            //    tabView.data.location = tabView.rewriteString(string: TitleLabel.text!)
-            //}
+            if TitleLabel.text != nil && TitleLabel.text != ""{
+                data.location = tabView.rewriteString(string: TitleLabel.text!)
+            }
             tabView.data = data
             navigationController?.pushViewController(tabView, animated: true)
         }

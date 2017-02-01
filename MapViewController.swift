@@ -11,19 +11,23 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
-    
-
     @IBOutlet weak var map: MKMapView!
     let locationManager = CLLocationManager()
+    
     var lat: Double?
     var long: Double?
+    var restDetail: Restaurant?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = restDetail?.name
         map.delegate = self
-        centerMap(lat: lat!, long: long!)
         print("lat=   \(lat!)")
         print("long=   \(long!)")
+        centerMap(lat: lat!, long: long!)
+        setAnnotation()
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -44,15 +48,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     func centerMap(lat: Double, long: Double){
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: lat, longitude: long), 1000, 1000)
         map.setRegion(coordinateRegion, animated: true)
+       // mark = CLPlacemark.
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func setAnnotation(){
+        let annotation = MapAnnotation(title: (restDetail?.name)!,
+                              locationName: (restDetail?.address)!,coordinate: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
+        
+        map.addAnnotation(annotation)
     }
     
-
+    
     /*
     // MARK: - Navigation
 
