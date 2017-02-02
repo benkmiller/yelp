@@ -25,46 +25,23 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //loadRestaurantIds()
-        
-        //self.locationManager.requestWhenInUseAuthorization()
-        //locationManager.delegate = self
-        //locationAuthStatus()
-        //if CLLocationManager.locationServicesEnabled() {
-        //    locationManager.delegate = self
-        //    locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        //    locationManager.startUpdatingLocation()
-        //
-        //}
-        
-        // 3
-        //if CLLocationManager.locationServicesEnabled() {
-        //    locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        //    locationManager.requestLocation()
-        //}
-        
+        locationManager.delegate = self
     }
     override func viewDidAppear(_ animated: Bool) {
-        self.locationManager.requestWhenInUseAuthorization()
-        locationManager.delegate = self
+        locationAuthStatus()
     }
     
     func locationAuthStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             //map.showsUserLocation = true
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.requestLocation()
-            //locationManager.startUpdatingLocation()
+            //locationManager.requestLocation()
+            locationManager.startUpdatingLocation()
+            
         }
-        else{
-            locationManager.requestWhenInUseAuthorization()
+        else {
+            self.locationManager.requestWhenInUseAuthorization()
         }
-    }
-    
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //var locValue:CLLocationCoordinate2D = manager.location!.coordinate
-        //userLocation = locValue
-        //print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
     
     func loadRestaurantIds()  {
@@ -77,11 +54,8 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                     self.data.dat = jsonVar;
                 }
                 print("Load Rest Ids:\(self.data.restaurantNames)")
-                //self.loadRestaurantDetails()
                 self.tableView.reloadData()
-
             }
-            //self.loadRestaurantDetails()
         }
     }
     
@@ -92,29 +66,32 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                 //debugPrint(responseData)
                 
                 let jsonVar = JSON(responseData.result.value!)
-                    
+                let lat = jsonVar["coordinates"]["latitude"].doubleValue
+                let long = jsonVar["coordinates"]["longitude"].doubleValue
+
                 self.data.restaurantDetails[index] = jsonVar
-                /*
-                let distance = self.locationManager.location?.distance(from: CLLocation(latitude: jsonVar["coordinates"]["latitude"].doubleValue, longitude: jsonVar["coordinates"]["longitude"].doubleValue))
-                let newRestaurant = Restaurant(json: jsonVar, calculatedDistance: distance!){
-                self.data.restaurants[index] = newRestaurant
-                */
-                let newRestaurant = Restaurant(json: jsonVar)
-                self.data.restaurants[index] = newRestaurant
-                let distance = self.locationManager.location?.distance(from: CLLocation(latitude: newRestaurant.lat!, longitude: newRestaurant.long!))
-                //let dist: CLLocationDistance = self.locationManager.location.distanceFr
+                guard lat != 0 && long != 0  else {return}
                 
-                cell.name2.text = String(repeating: "★", count: Int(self.data.restaurants[index].rating))
-                cell.distanceLabel.text = String(describing: distance)
+                if let distance = self.locationManager.location?.distance(from: CLLocation(latitude: lat, longitude: long)){
+                    let newRestaurant = Restaurant(json: jsonVar, calculatedDistance: distance)
+                    self.data.restaurants[index] = newRestaurant
+                    cell.distanceLabel.text = String(describing: Int(distance/1000))+"km away"
+                    cell.name2.text = String(repeating: "★", count: Int(self.data.restaurants[index].rating))
+                }
+                else{
+                    let newRestaurant = Restaurant(json: jsonVar, calculatedDistance: 0.0)
+                    self.data.restaurants[index] = newRestaurant
                     
+                    cell.distanceLabel.text = "nodata"
+                    cell.name2.text = String(repeating: "★", count: Int(self.data.restaurants[index].rating))
+                }
+                
                 print("*********loading details \(index)")
                 print("Address:  "+self.data.restaurants[index].address)
                 print("Stars:    "+String(self.data.restaurants[index].rating))
                 print(" imageUrl:  \(self.data.restaurants[index].pictures[0])")
                 print(" latitude of user: \(self.locationManager.location?.coordinate.latitude)")
                 print(" longitude of user: \(self.locationManager.location?.coordinate.longitude)")
-                //cell.IView.image = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
-                //cell.IView.downloadImageFrom(link: self.restaurants[index].pictures[0], contentMode: UIViewContentMode.scaleAspectFit)
 
                 self.loadPic(index: index, cell: cell)
             }
@@ -217,37 +194,34 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     }
     
     @IBAction func searchButton(_ sender: UIBarButtonItem) {
-        if searchField.text != nil {
+        if searchField.hasText == true {
             data.term = rewriteString(string: searchField.text!)
             loadRestaurantIds()
             tableView.reloadData()
+            
         }
     }
     
     func sortPageByRating(action: UIAlertAction) {
-        sortList()
-    }
-    
-    func sortList() {
         data.restaurants.sort() { $0.rating > $1.rating }
         for index in 0...9 {
             print(data.restaurants[index].rating)
         }
         tableView.reloadData()
-        
+       
     }
     
-    
-    //TODO
     func sortPageByDistance(action: UIAlertAction) {
-        //let url = URL(string: "https://" + action.title!)!
-        //webView.load(URLRequest(url: url))
+        data.restaurants.sort() { $0.distanceToUser! > $1.distanceToUser! }
+        for index in 0...9 {
+            print(data.restaurants[index].rating)
+        }
+        tableView.reloadData()
     }
 
     func rewriteString(string: String) -> String {
         return string.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
     }
-    
     
     ////TABLE
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -258,12 +232,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         let cell:CellClass = tableView.dequeueReusableCell(withIdentifier: "CellClass", for: indexPath) as! CellClass
         if reloadTableForSort == false{
             cell.name1.text = data.restaurantNames[indexPath.row]
-            //cell.IView.image = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
-            //cell.IView.downloadImageFrom(link: restaurants[indexPath.row].pictures[0], contentMode: UIViewContentMode.scaleAspectFit)
             loadRestaurantDetail(index: indexPath.row, cell: cell)
-            //var getLat: CLLocationDegrees = latitude
-            //var getLon: CLLocationDegrees = centre.longitude
-            //cell.distanceLabel.text = String(data.restaurantDistances[indexPath.row])
             return cell
         }
         else {
@@ -272,7 +241,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             cell.IView.contentMode = UIViewContentMode.scaleAspectFit
             cell.IView.image = data.images[indexPath.row].image1
 
-            //cell.distanceLabel.text = String(describing: distance)
+            cell.distanceLabel.text = String(describing: Int(data.restaurants[indexPath.row].distanceToUser!/1000))+"km away"
             //REMEMBER TO CONFIGURE DISTANCE
             //reloadTableForSort = false;
             return cell
@@ -280,12 +249,11 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             vc.title = data.restaurantNames[indexPath.row]
             vc.restDetail = data.restaurants[indexPath.row]
             vc.reviews = data.reviews[indexPath.row]
-            vc.images = data.images[indexPath.row]
+            vc.image1 = data.images[indexPath.row]
             
             navigationController?.pushViewController(vc, animated: true)
         }

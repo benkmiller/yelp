@@ -12,7 +12,7 @@ import MapKit
 struct Restaurant{
     
     
-    init (json: JSON){
+    init (json: JSON, calculatedDistance: Double){
         name = json["name"].stringValue
         pictures = json["photos"].arrayObject as! [String]
         rating = json["rating"].intValue
@@ -23,8 +23,11 @@ struct Restaurant{
         phoneNum = json["phone"].stringValue
         lat = json["coordinates"]["latitude"].doubleValue
         long = json["coordinates"]["longitude"].doubleValue
-        //distanceToUser = calculatedDistance
+        distanceToUser = calculatedDistance
     }
+    
+    
+
     /*
     func updateReviews(json: JSON){
         reviews = json
@@ -39,7 +42,7 @@ struct Restaurant{
     var pictures: [String] = ["","",""]
     var rating: Int = 0
     var price = ""
-    var distanceTo: Double?
+    //var distanceTo: Double?
     var address: String = ""
     //var reviews: JSON = [:]
     var type = ""
@@ -47,7 +50,7 @@ struct Restaurant{
     var lat: Double?
     var long: Double?
     var reviewUrl: String = ""
-    //var distanceToUser: Double?
+    var distanceToUser: Double?
     //var image1 = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
     //var image2 = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
     //var image3 = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
@@ -78,5 +81,6 @@ struct ImageStruct {
     var image1: UIImage?
     
 }
+
 
 

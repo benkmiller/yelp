@@ -22,14 +22,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         title = restDetail?.name
         map.delegate = self
-        print("lat=   \(lat!)")
-        print("long=   \(long!)")
         centerMap(lat: lat!, long: long!)
         setAnnotation()
-        
-        
 
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,28 +41,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func centerMap(lat: Double, long: Double){
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: lat, longitude: long), 1000, 1000)
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: lat, longitude: long), (restDetail?.distanceToUser)!*2.5, (restDetail?.distanceToUser)!*2)
         map.setRegion(coordinateRegion, animated: true)
-       // mark = CLPlacemark.
-        
     }
     
     func setAnnotation(){
         let annotation = MapAnnotation(title: (restDetail?.name)!,
                               locationName: (restDetail?.address)!,coordinate: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
-        
         map.addAnnotation(annotation)
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

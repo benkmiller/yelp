@@ -26,6 +26,7 @@
 		D6E4F9671E37E37C00DC11AA /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E4F9661E37E37C00DC11AA /* Restaurant.swift */; };
 		D6E74A7E1E3F8FBE00E52007 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E74A7D1E3F8FBE00E52007 /* MapKit.framework */; };
 		D6EE12101E42675400B189B1 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EE120F1E42675400B189B1 /* WebViewController.swift */; };
+		D6EE12221E43D41200B189B1 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EE12211E43D41200B189B1 /* ImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +179,7 @@
 		D6E4F9661E37E37C00DC11AA /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		D6E74A7D1E3F8FBE00E52007 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D6EE120F1E42675400B189B1 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		D6EE12211E43D41200B189B1 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +273,7 @@
 				D6E4F9601E37A2DD00DC11AA /* TitleViewController.swift */,
 				D6E4F92A1E326A7E00DC11AA /* ViewController.swift */,
 				D6E4F95A1E364F9000DC11AA /* DetailViewController.swift */,
+				D6EE12211E43D41200B189B1 /* ImageViewController.swift */,
 				D6EE120F1E42675400B189B1 /* WebViewController.swift */,
 				D6DC16461E3ED15C00A5E794 /* MapViewController.swift */,
 			);
@@ -488,6 +491,7 @@
 				D6E4F9671E37E37C00DC11AA /* Restaurant.swift in Sources */,
 				D6E4F9291E326A7E00DC11AA /* AppDelegate.swift in Sources */,
 				D6E4F95B1E364F9000DC11AA /* DetailViewController.swift in Sources */,
+				D6EE12221E43D41200B189B1 /* ImageViewController.swift in Sources */,
 				D6E4F9611E37A2DE00DC11AA /* TitleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
