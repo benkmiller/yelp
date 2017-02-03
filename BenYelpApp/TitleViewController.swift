@@ -20,10 +20,13 @@ class TitleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAround()
+        
         Button.backgroundColor = .clear
         Button.layer.cornerRadius = 4
         Button.layer.borderWidth = 1
         Button.layer.borderColor = UIColor.red.cgColor
+        //self.hideKeyboardWhenTappedAround()
         
         loadRestaurantIds()
     }
@@ -70,3 +73,16 @@ class TitleViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
+
+/*
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+ */

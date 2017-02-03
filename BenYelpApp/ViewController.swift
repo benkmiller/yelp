@@ -25,10 +25,13 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         locationManager.delegate = self
     }
     override func viewDidAppear(_ animated: Bool) {
+        //self.hideKeyboardWhenTappedAround()
         locationAuthStatus()
+        
     }
     
     func locationAuthStatus() {
@@ -44,8 +47,10 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         }
     }
     
-    func loadRestaurantIds()  {
-        Alamofire.request(data.urlP1+data.term+data.urlP2+data.location, headers: data.header).responseJSON { [unowned self] (responseData) -> Void in
+    func loadRestaurantIds(url: String)  {
+        //let url1 = data.urlP1+data.term+data.urlP2+data.location
+
+        Alamofire.request(url, headers: data.header).responseJSON { [unowned self] (responseData) -> Void in
             if((responseData.result.value) != nil) {
                 let jsonVar = JSON(responseData.result.value!)
                 for index in 0...9 {
@@ -100,55 +105,6 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             }
         }
     }
- /*
-    func loadPics(index: Int, cell: CellClass) {
-            Alamofire.request(self.data.restaurants[index].pictures[0]).responseImage { [unowned self] response in
-                //print("*********start load pics")
-                
-                //debugPrint(response)
-                let image = response.result.value
-                let imageToSave = ImageStruct(images:image!)
-                
-                Alamofire.request(self.data.restaurants[index].pictures[1]).responseImage { [unowned self] response2 in
-                    //print("*********start load pics")
-                    
-                    //debugPrint(response)
-                    let image2 = response2.result.value
-                    let imageToSave = ImageStruct(images:image!)
-                                       
-                    
-                    Alamofire.request(self.data.restaurants[index].pictures[2]).responseImage { [unowned self] response in
-                        //print("*********start load pics")
-                        
-                        //debugPrint(response)
-                        let image3 = response.result.value
-                        let imageToSave = ImageStruct(images:image!)
-                        self.data.images[index] = imageToSave
-                        
-                        
-                        cell.IView.contentMode = UIViewContentMode.scaleAspectFit
-                        cell.IView.image = image
-                        //cell.IView.image =self.restaurants[index].image1
-                        //self.tableView.reloadData()
-                        self.loadRestaurantReview(index: index, cell: cell)
-                        //print("Printing Restaurants")
-                        // for index in 0...9 {
-                        //    print(self.data.restaurants[index].name)
-                        //}
-                        
-                    }
-                }
-                
-                
-                self.loadRestaurantReview(index: index, cell: cell)
-                //print("Printing Restaurants")
-                // for index in 0...9 {
-                //    print(self.data.restaurants[index].name)
-                //}
-                
-            }
-    }
- */
     
     func loadPic(index: Int, cell: CellClass){
         Alamofire.request(self.data.restaurants[index].pictures[0]).responseImage { [unowned self] response in
@@ -183,6 +139,14 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         }
     }
     
+    @IBAction func nearMePressed(_ sender: Any) {
+        let lat = self.locationManager.location?.coordinate.latitude
+        let long = self.locationManager.location?.coordinate.longitude
+        let url = data.urlP1+data.term+data.urlP1A+String(describing: lat!)+data.urlP2A+String(describing: long!)
+        print(url)
+        loadRestaurantIds(url: url)
+        tableView.reloadData()
+    }
     
     @IBAction func sortButton(_ sender: Any) {
         reloadTableForSort = true
@@ -196,7 +160,8 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     @IBAction func searchButton(_ sender: UIBarButtonItem) {
         if searchField.hasText == true {
             data.term = rewriteString(string: searchField.text!)
-            loadRestaurantIds()
+            let url = data.urlP1+data.term+data.urlP2+data.location
+            loadRestaurantIds(url: url)
             tableView.reloadData()
             
         }
@@ -212,10 +177,11 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     }
     
     func sortPageByDistance(action: UIAlertAction) {
-        data.restaurants.sort() { $0.distanceToUser! > $1.distanceToUser! }
-        for index in 0...9 {
-            print(data.restaurants[index].rating)
+        for index in 0...9{
+            guard data.restaurants[index].distanceToUser != nil else {return}
         }
+        data.restaurants.sort() { $0.distanceToUser! < $1.distanceToUser! }
+        
         tableView.reloadData()
     }
 
@@ -240,8 +206,12 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             cell.name2.text = String(repeating: "★", count: Int(self.data.restaurants[indexPath.row].rating))
             cell.IView.contentMode = UIViewContentMode.scaleAspectFit
             cell.IView.image = data.images[indexPath.row].image1
-
-            cell.distanceLabel.text = String(describing: Int(data.restaurants[indexPath.row].distanceToUser!/1000))+"km away"
+            if data.restaurants[indexPath.row].distanceToUser != nil {
+                cell.distanceLabel.text = String(describing: Int(data.restaurants[indexPath.row].distanceToUser!/1000))+"km away"
+            }
+            else {
+                cell.distanceLabel.text = "nodata"
+            }
             //REMEMBER TO CONFIGURE DISTANCE
             //reloadTableForSort = false;
             return cell
@@ -266,3 +236,16 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     }
 
 }
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        tap.cancelsTouchesInView = false
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+

@@ -25,7 +25,12 @@ class YelpData: NSObject {
     let urlDetail = "https://api.yelp.com/v3/businesses/"
     let urlP1 = "https://api.yelp.com/v3/businesses/search?term="
     let urlP2 = "&location="
+    let urlP1A = "&latitude="
+    let urlP2A = "&longitude="
     let urlReview = "/reviews"
+    
+    
+        
     
     var restaurantIds = ["","","","","","","","","",""]
     var restaurantNames = ["","","","","","","","","",""]
