@@ -13,7 +13,17 @@ import MapKit
 import CoreLocation
 
 
-class ViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate, CLLocationManagerDelegate{
+class ViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate, CLLocationManagerDelegate, UITextFieldDelegate{
+    @IBAction func goTriggered(_ sender: Any) {
+        if searchField.hasText == true {
+            data.term = rewriteString(string: searchField.text!)
+            let url = data.urlP1+data.term+data.urlP2+data.location
+            loadRestaurantIds(url: url)
+            tableView.reloadData()
+            
+        }
+        
+    }
     
     var data = YelpData() //Instantiate Data Model
     var userLocation: CLLocationCoordinate2D?
@@ -27,7 +37,26 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         locationManager.delegate = self
+        self.searchField.delegate = self
     }
+    /*
+    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+        //textField code
+        //textField.resignFirstResponder()  //if desired
+        performAction()
+        return true
+    }
+    func performAction() {
+        if searchField.hasText == true {
+            data.term = rewriteString(string: searchField.text!)
+            let url = data.urlP1+data.term+data.urlP2+data.location
+            loadRestaurantIds(url: url)
+            tableView.reloadData()
+            
+        }
+        //action events
+    }
+    */
     override func viewDidAppear(_ animated: Bool) {
         //self.hideKeyboardWhenTappedAround()
         locationAuthStatus()

@@ -165,7 +165,10 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="go"/>
+                            <connections>
+                                <action selector="goTriggered:" destination="EiK-J8-te5" eventType="primaryActionTriggered" id="o1g-Ux-1NK"/>
+                            </connections>
                         </textField>
                         <rightBarButtonItems>
                             <barButtonItem title="Near Me" id="JcQ-KJ-02p">
