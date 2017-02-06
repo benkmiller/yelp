@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Foundation
 
 class TitleViewController: UIViewController {
     
@@ -27,8 +28,25 @@ class TitleViewController: UIViewController {
         Button.layer.borderWidth = 1
         Button.layer.borderColor = UIColor.red.cgColor
         //self.hideKeyboardWhenTappedAround()
+        //authenticateUser()
+        //loadRestaurantIds()
         
-        loadRestaurantIds()
+        loadRestaurantIds(){ response in
+            print(response.stringValue)
+            print("Starting DEBUG RESPONSE #@#@!@##$@")
+            debugPrint(response)
+            //let jsonVar = JSON(response.result.value!)
+            for index in 0...9 {
+                self.data.restaurantIds[index] = response["businesses"][index]["id"].stringValue
+                self.data.restaurantNames[index] = response["businesses"][index]["name"].stringValue
+                self.data.dat = response;
+            }
+        }
+        
+        
+        //authenticateUser{ (responseObject, error) in
+        //    print(responseObject ?? nil)
+        //}
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,6 +68,43 @@ class TitleViewController: UIViewController {
             navigationController?.pushViewController(tabView, animated: true)
         }
     }
+    /*
+    func authenticateUser(completionHandler: @escaping (_ responseObject: String?, _ error: NSError?) -> ()) {
+        makeAuthenticateUserCall(completionHandler: completionHandler)
+    }
+    
+    func makeAuthenticateUserCall(completionHandler: @escaping (_ responseObject: String?, _ error: NSError?) -> ()) {
+        Alamofire.request(data.urlForRestaurantId, headers: data.header)
+            .responseString { request, response, responseString, responseError in
+                completionHandler(responseObject: responseString as String!, error: responseError)
+        }
+        
+        
+        
+        
+    }
+    */
+    //authenticateUser{ (responseObject, error) in
+    //println(responseObject)
+    //}
+
+    
+    func loadRestaurantIds(completion: @escaping (JSON) -> ())  {
+        Alamofire.request(data.urlP1+data.term+data.urlP2+data.location, headers: data.header).validate()
+            .responseJSON { response in
+                switch response.result {
+                case .success:
+                    let jsonData = JSON(data: response.data!)
+                    completion(jsonData)
+                case .failure(let error):
+                    //MExceptionManager.handleNetworkErrors(error)
+                    completion(JSON(data: NSData() as Data))
+                }
+        }
+    }
+    
+    
+    /*
     
     func loadRestaurantIds()  {
         Alamofire.request(data.urlP1+data.term+data.urlP2+data.location, headers: data.header).responseJSON { [unowned self] (responseData) -> Void in
@@ -67,7 +122,7 @@ class TitleViewController: UIViewController {
             //self.loadRestaurantDetails()
         }
     }
-
+ */
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

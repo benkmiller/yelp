@@ -100,7 +100,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="342" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="london-thumb" translatesAutoresizingMaskIntoConstraints="NO" id="wOE-yj-xSA">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wOE-yj-xSA">
                                             <rect key="frame" x="9" y="-1" width="80" height="65"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="80" id="BmR-qd-E91"/>
@@ -115,13 +115,13 @@
                                             <rect key="frame" x="97" y="8" width="102" height="37"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;nameLabel&gt;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="Vki-j2-RqP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="102" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="102" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <color key="textColor" red="0.53492228138632103" green="0.37768769138869479" blue="0.17711066608307041" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;#stars&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9h-hC-Wfb">
-                                                    <rect key="frame" x="0.0" y="20" width="59" height="17"/>
+                                                    <rect key="frame" x="0.0" y="19.5" width="58.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.53492228138632103" green="0.37768769138869479" blue="0.17711066608307041" alpha="0.66906571061643838" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -161,7 +161,7 @@
                     <navigationItem key="navigationItem" id="ZzD-Q5-7Ak">
                         <nil key="title"/>
                         <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Find Local Food..." textAlignment="natural" minimumFontSize="17" id="Nug-br-zW6">
-                            <rect key="frame" x="14" y="7" width="171" height="30"/>
+                            <rect key="frame" x="76" y="7" width="171" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -181,11 +181,6 @@
                                     <action selector="sortButton:" destination="EiK-J8-te5" id="0Da-EV-IOQ"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Search" id="q1M-Q2-q1W">
-                                <connections>
-                                    <action selector="searchButton:" destination="EiK-J8-te5" id="Xov-tY-9wb"/>
-                                </connections>
-                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -203,7 +198,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1087.2" y="66.11694152923539"/>
+            <point key="canvasLocation" x="1006" y="28"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gVQ-EU-iUX">
@@ -468,6 +463,5 @@
     </scenes>
     <resources>
         <image name="Screen Shot 2017-01-23 at 8.19.32 PM" width="994" height="700"/>
-        <image name="london-thumb" width="80" height="66"/>
     </resources>
 </document>

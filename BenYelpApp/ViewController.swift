@@ -76,6 +76,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         }
     }
     
+    
     func loadRestaurantIds(url: String)  {
         //let url1 = data.urlP1+data.term+data.urlP2+data.location
 
@@ -185,7 +186,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(ac, animated: true)
     }
-    
+    /*
     @IBAction func searchButton(_ sender: UIBarButtonItem) {
         if searchField.hasText == true {
             data.term = rewriteString(string: searchField.text!)
@@ -195,7 +196,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             
         }
     }
-    
+    */
     func sortPageByRating(action: UIAlertAction) {
         data.restaurants.sort() { $0.rating > $1.rating }
         for index in 0...9 {

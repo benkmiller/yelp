@@ -116,11 +116,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BenYelpApp/ViewController.swift"
-            timestampString = "507924164.627114"
+            timestampString = "508049654.049207"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -132,11 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BenYelpApp/ViewController.swift"
-            timestampString = "507924164.627114"
+            timestampString = "508049654.049207"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -148,11 +148,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BenYelpApp/TitleViewController.swift"
-            timestampString = "507671165.170986"
+            timestampString = "508050319.40951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
             landmarkName = "TitleViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -164,11 +164,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BenYelpApp/ViewController.swift"
-            timestampString = "507924164.627114"
+            timestampString = "508049654.049207"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "loadRestaurantIds(url:)"
             landmarkType = "7">
             <Locations>
@@ -228,11 +228,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BenYelpApp/ViewController.swift"
-            timestampString = "507924164.627114"
+            timestampString = "508049654.049207"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "loadRestaurantDetail(index:cell:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -322,11 +322,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BenYelpApp/ViewController.swift"
-            timestampString = "507924164.627114"
+            timestampString = "508049654.049207"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -338,11 +338,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BenYelpApp/ViewController.swift"
-            timestampString = "507924164.627114"
+            timestampString = "508049654.049207"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "loadRestaurantDetail(index:cell:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -354,27 +354,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BenYelpApp/ViewController.swift"
-            timestampString = "507924164.627114"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "loadRestaurantDetail(index:cell:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BenYelpApp/ViewController.swift"
-            timestampString = "507924164.627114"
+            timestampString = "508049654.049207"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "119"
             endingLineNumber = "119"
+            landmarkName = "loadRestaurantDetail(index:cell:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BenYelpApp/ViewController.swift"
+            timestampString = "508049654.049207"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "loadRestaurantDetail(index:cell:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -418,11 +418,11 @@
                   moduleName = "BenYelpApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/benmiller/Desktop/App&apos;s/BenYelpApp/BenYelpApp/DetailViewController.swift"
-                  timestampString = "507763588.127929"
+                  timestampString = "508050563.904388"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "129"
-                  endingLineNumber = "129"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
                   offsetFromSymbolStart = "19">
                </Location>
                <Location
@@ -433,11 +433,11 @@
                   moduleName = "BenYelpApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/benmiller/Desktop/App&apos;s/BenYelpApp/BenYelpApp/DetailViewController.swift"
-                  timestampString = "507763588.12917"
+                  timestampString = "508050563.906852"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "129"
-                  endingLineNumber = "129"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
                   offsetFromSymbolStart = "407">
                </Location>
             </Locations>
@@ -482,11 +482,11 @@
                   moduleName = "BenYelpApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/benmiller/Desktop/App&apos;s/BenYelpApp/BenYelpApp/DetailViewController.swift"
-                  timestampString = "507763588.132689"
+                  timestampString = "508050563.912071"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "138"
-                  endingLineNumber = "138"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
                   offsetFromSymbolStart = "19">
                </Location>
                <Location
@@ -497,11 +497,11 @@
                   moduleName = "BenYelpApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/benmiller/Desktop/App&apos;s/BenYelpApp/BenYelpApp/DetailViewController.swift"
-                  timestampString = "507763588.134434"
+                  timestampString = "508050563.914553"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "138"
-                  endingLineNumber = "138"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
                   offsetFromSymbolStart = "371">
                </Location>
             </Locations>
@@ -521,6 +521,38 @@
             endingLineNumber = "20"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BenYelpApp/TitleViewController.swift"
+            timestampString = "508050539.930853"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "TitleViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BenYelpApp/TitleViewController.swift"
+            timestampString = "508050539.930853"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "TitleViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
