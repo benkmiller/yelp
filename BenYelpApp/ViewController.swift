@@ -14,16 +14,6 @@ import CoreLocation
 
 
 class ViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate, CLLocationManagerDelegate, UITextFieldDelegate{
-    @IBAction func goTriggered(_ sender: Any) {
-        if searchField.hasText == true {
-            data.term = rewriteString(string: searchField.text!)
-            let url = data.urlP1+data.term+data.urlP2+data.location
-            loadRestaurantIds(url: url)
-            tableView.reloadData()
-            
-        }
-        
-    }
     
     var data = YelpData() //Instantiate Data Model
     var userLocation: CLLocationCoordinate2D?
@@ -105,7 +95,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                 let long = jsonVar["coordinates"]["longitude"].doubleValue
 
                 self.data.restaurantDetails[index] = jsonVar
-                guard lat != 0 && long != 0  else {return}
+                //guard lat != 0 && long != 0  else {return}
                 
                 if let distance = self.locationManager.location?.distance(from: CLLocation(latitude: lat, longitude: long)){
                     let newRestaurant = Restaurant(json: jsonVar, calculatedDistance: distance)
@@ -169,6 +159,15 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         }
     }
     
+    @IBAction func goTriggered(_ sender: Any) {
+        if searchField.hasText == true {
+            data.term = rewriteString(string: searchField.text!)
+            let url = data.urlP1+data.term+data.urlP2+data.location
+            loadRestaurantIds(url: url)
+            tableView.reloadData()
+        }
+    }
+    
     @IBAction func nearMePressed(_ sender: Any) {
         let lat = self.locationManager.location?.coordinate.latitude
         let long = self.locationManager.location?.coordinate.longitude
@@ -203,7 +202,6 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             print(data.restaurants[index].rating)
         }
         tableView.reloadData()
-       
     }
     
     func sortPageByDistance(action: UIAlertAction) {
@@ -211,7 +209,6 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             guard data.restaurants[index].distanceToUser != nil else {return}
         }
         data.restaurants.sort() { $0.distanceToUser! < $1.distanceToUser! }
-        
         tableView.reloadData()
     }
 
@@ -219,7 +216,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         return string.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
     }
     
-    ////TABLE
+    ////DELEGATE
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.restaurantNames.count
     }

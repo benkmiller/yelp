@@ -63,31 +63,22 @@ class TitleViewController: UIViewController {
         if let tabView = storyboard?.instantiateViewController(withIdentifier: "Table") as? ViewController {
             if TitleLabel.text != nil && TitleLabel.text != ""{
                 data.location = tabView.rewriteString(string: TitleLabel.text!)
+                loadRestaurantIds(){ response in
+                    print(response.stringValue)
+                    print("Starting DEBUG RESPONSE #@#@!@##$@")
+                    debugPrint(response)
+                    //let jsonVar = JSON(response.result.value!)
+                    for index in 0...9 {
+                        self.data.restaurantIds[index] = response["businesses"][index]["id"].stringValue
+                        self.data.restaurantNames[index] = response["businesses"][index]["name"].stringValue
+                        self.data.dat = response;
+                    }
+                }
             }
             tabView.data = data
             navigationController?.pushViewController(tabView, animated: true)
         }
     }
-    /*
-    func authenticateUser(completionHandler: @escaping (_ responseObject: String?, _ error: NSError?) -> ()) {
-        makeAuthenticateUserCall(completionHandler: completionHandler)
-    }
-    
-    func makeAuthenticateUserCall(completionHandler: @escaping (_ responseObject: String?, _ error: NSError?) -> ()) {
-        Alamofire.request(data.urlForRestaurantId, headers: data.header)
-            .responseString { request, response, responseString, responseError in
-                completionHandler(responseObject: responseString as String!, error: responseError)
-        }
-        
-        
-        
-        
-    }
-    */
-    //authenticateUser{ (responseObject, error) in
-    //println(responseObject)
-    //}
-
     
     func loadRestaurantIds(completion: @escaping (JSON) -> ())  {
         Alamofire.request(data.urlP1+data.term+data.urlP2+data.location, headers: data.header).validate()
