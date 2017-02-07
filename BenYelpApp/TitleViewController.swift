@@ -13,7 +13,8 @@ import Foundation
 class TitleViewController: UIViewController {
     
     var location: String?
-    var data = YelpData()
+    //var data = YelpData()
+    var dataRetrieve = DataRetrieval()
     
     @IBOutlet weak var Button: UIButton!
     @IBOutlet weak var TitleLabel: UITextField!
@@ -31,15 +32,16 @@ class TitleViewController: UIViewController {
         //authenticateUser()
         //loadRestaurantIds()
         
-        loadRestaurantIds(){ response in
+        let url = dataRetrieve.data.urlP1+dataRetrieve.data.term+dataRetrieve.data.urlP2+dataRetrieve.data.location
+        dataRetrieve.loadRestaurantIds(url: url){ response in
             print(response.stringValue)
             print("Starting DEBUG RESPONSE #@#@!@##$@")
             debugPrint(response)
             //let jsonVar = JSON(response.result.value!)
             for index in 0...9 {
-                self.data.restaurantIds[index] = response["businesses"][index]["id"].stringValue
-                self.data.restaurantNames[index] = response["businesses"][index]["name"].stringValue
-                self.data.dat = response;
+                self.dataRetrieve.data.restaurantIds[index] = response["businesses"][index]["id"].stringValue
+                self.dataRetrieve.data.restaurantNames[index] = response["businesses"][index]["name"].stringValue
+                self.dataRetrieve.data.dat = response;
             }
         }
         
@@ -61,59 +63,29 @@ class TitleViewController: UIViewController {
     
     @IBAction func ButtonPressed(_ sender: UIButton) {
         if let tabView = storyboard?.instantiateViewController(withIdentifier: "Table") as? ViewController {
+            /*
             if TitleLabel.text != nil && TitleLabel.text != ""{
-                data.location = tabView.rewriteString(string: TitleLabel.text!)
-                loadRestaurantIds(){ response in
+                dataRetrieve.data.location = tabView.rewriteString(string: TitleLabel.text!)
+                dataRetrieve.loadRestaurantIds(url: dataRetrieve.data.urlP1+dataRetrieve.data.term+dataRetrieve.data.urlP2+dataRetrieve.data.location){ response in
                     print(response.stringValue)
                     print("Starting DEBUG RESPONSE #@#@!@##$@")
                     debugPrint(response)
                     //let jsonVar = JSON(response.result.value!)
                     for index in 0...9 {
-                        self.data.restaurantIds[index] = response["businesses"][index]["id"].stringValue
-                        self.data.restaurantNames[index] = response["businesses"][index]["name"].stringValue
-                        self.data.dat = response;
+                        self.dataRetrieve.data.restaurantIds[index] = response["businesses"][index]["id"].stringValue
+                        self.dataRetrieve.data.restaurantNames[index] = response["businesses"][index]["name"].stringValue
+                        self.dataRetrieve.data.dat = response;
                     }
                 }
             }
-            tabView.data = data
+            */
+ 
+            tabView.dataRetrieve = dataRetrieve
+            tabView.dataRetrieve.data = dataRetrieve.data
             navigationController?.pushViewController(tabView, animated: true)
         }
     }
     
-    func loadRestaurantIds(completion: @escaping (JSON) -> ())  {
-        Alamofire.request(data.urlP1+data.term+data.urlP2+data.location, headers: data.header).validate()
-            .responseJSON { response in
-                switch response.result {
-                case .success:
-                    let jsonData = JSON(data: response.data!)
-                    completion(jsonData)
-                case .failure(let error):
-                    //MExceptionManager.handleNetworkErrors(error)
-                    completion(JSON(data: NSData() as Data))
-                }
-        }
-    }
-    
-    
-    /*
-    
-    func loadRestaurantIds()  {
-        Alamofire.request(data.urlP1+data.term+data.urlP2+data.location, headers: data.header).responseJSON { [unowned self] (responseData) -> Void in
-            if((responseData.result.value) != nil) {
-                let jsonVar = JSON(responseData.result.value!)
-                for index in 0...9 {
-                    self.data.restaurantIds[index] = jsonVar["businesses"][index]["id"].stringValue
-                    self.data.restaurantNames[index] = jsonVar["businesses"][index]["name"].stringValue
-                    self.data.dat = jsonVar;
-                }
-                //print("Load Rest Ids:\(self.data.restaurantNames)")
-                //self.loadRestaurantDetails()
-                
-            }
-            //self.loadRestaurantDetails()
-        }
-    }
- */
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

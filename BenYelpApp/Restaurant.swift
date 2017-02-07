@@ -18,7 +18,6 @@ struct Restaurant{
         rating = json["rating"].intValue
         price = json["price"].stringValue
         address = json["location"]["address1"].stringValue
-        //distanceTo = coordinate.distance(from: RestaurantCoordinate)
         type = json["categories"][0]["title"].stringValue
         phoneNum = json["phone"].stringValue
         lat = json["coordinates"]["latitude"].doubleValue
@@ -42,7 +41,7 @@ struct Restaurant{
     var pictures: [String] = ["","",""]
     var rating: Int = 0
     var price = ""
-    //var distanceTo: Double?
+
     var address: String = ""
     //var reviews: JSON = [:]
     var type = ""

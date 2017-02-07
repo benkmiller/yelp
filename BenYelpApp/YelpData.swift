@@ -12,8 +12,7 @@ import Alamofire
 
 class YelpData: NSObject {
     
-    
-    
+
     var restaurants = [Restaurant](repeating: Restaurant(), count:10)
     var reviews = [Reviews](repeating: Reviews(), count: 10)
     var images = [ImageStruct](repeating: ImageStruct(), count: 10)
