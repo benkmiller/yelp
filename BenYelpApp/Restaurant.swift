@@ -11,7 +11,6 @@ import MapKit
 
 struct Restaurant{
     
-    
     init (json: JSON, calculatedDistance: Double){
         name = json["name"].stringValue
         pictures = json["photos"].arrayObject as! [String]
@@ -25,14 +24,6 @@ struct Restaurant{
         distanceToUser = calculatedDistance
     }
     
-    
-
-    /*
-    func updateReviews(json: JSON){
-        reviews = json
-    }
-     */
-    
     init() {
         
     }
@@ -43,20 +34,12 @@ struct Restaurant{
     var price = ""
 
     var address: String = ""
-    //var reviews: JSON = [:]
     var type = ""
     var phoneNum = ""
     var lat: Double?
     var long: Double?
     var reviewUrl: String = ""
     var distanceToUser: Double?
-    //var image1 = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
-    //var image2 = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
-    //var image3 = UIImage(named: "Screen Shot 2017-01-23 at 8.19.32 PM")
-    ///var image1: UIImage?
-    ///var image2: UIImage?
-    ///var image3: UIImage?
-    
     
 }
 

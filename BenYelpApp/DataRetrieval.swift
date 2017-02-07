@@ -42,7 +42,6 @@ class DataRetrieval: NSObject {
                     completion(jsonData)
                 case .failure(let error):
                     print("ERROR RETRIEVING DETAILS: \(error.localizedDescription)")
-                    
                 }
         }
     }

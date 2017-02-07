@@ -37,10 +37,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             dataRetrieve.data.term = rewriteString(string: searchField.text!)
             let url = dataRetrieve.data.urlP1+dataRetrieve.data.term+dataRetrieve.data.urlP2+dataRetrieve.data.location
             dataRetrieve.loadRestaurantIds(url: url){ [unowned self] response in
-                print(response.stringValue)
-                print("Starting DEBUG RESPONSE #@#@!@##$@")
-                debugPrint(response)
-                //let jsonVar = JSON(response.result.value!)
+                
                 for index in 0...9 {
                     self.dataRetrieve.data.restaurantIds[index] = response["businesses"][index]["id"].stringValue
                     self.dataRetrieve.data.restaurantNames[index] = response["businesses"][index]["name"].stringValue
@@ -54,10 +51,9 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     @IBAction func nearMePressed(_ sender: Any) {
         let usrLat = self.locationManager?.location?.coordinate.latitude
         let usrLong = self.locationManager?.location?.coordinate.longitude
-        print("lat:\(usrLat)")
-        print("long: \(usrLong)")
+        
         let url = dataRetrieve.data.urlP1+dataRetrieve.data.term+dataRetrieve.data.urlP1A+String(describing: usrLat!)+dataRetrieve.data.urlP2A+String(describing: usrLong!)
-        print(url)
+        
         dataRetrieve.loadRestaurantIds(url: url){ [unowned self] response in
             //let jsonVar = JSON(response.result.value!)
             for index in 0...9 {
@@ -67,7 +63,6 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             }
             self.tableView.reloadData()
         }
-        //self.tableView.reloadData()
     }
     
     @IBAction func sortButton(_ sender: Any) {

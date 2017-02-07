@@ -12,7 +12,6 @@ class ImageViewController: UIViewController {
     
     var image: UIImage?
 
-    
     @IBOutlet weak var _Image: UIImageView!
     
     override func viewDidLoad() {
