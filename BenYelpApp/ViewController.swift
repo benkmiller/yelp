@@ -18,7 +18,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     //var data = YelpData() //Instantiate Data Model
     var dataRetrieve =  DataRetrieval()
     var userLocation: CLLocationCoordinate2D?
-    let locationManager = CLLocationManager()
+    var locationManager: CLLocationManager?
     var reloadTableForSort = false
 
     
@@ -27,27 +27,8 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        locationManager.delegate = self
+        locationManager?.delegate = self
         self.searchField.delegate = self
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        //self.hideKeyboardWhenTappedAround()
-        locationAuthStatus()
-        
-    }
-    
-    func locationAuthStatus() {
-        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-            //map.showsUserLocation = true
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            //locationManager.requestLocation()
-            locationManager.startUpdatingLocation()
-            
-        }
-        else {
-            self.locationManager.requestWhenInUseAuthorization()
-        }
     }
     
     @IBAction func goTriggered(_ sender: Any) {
@@ -71,8 +52,8 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     }
     
     @IBAction func nearMePressed(_ sender: Any) {
-        let usrLat = self.locationManager.location?.coordinate.latitude
-        let usrLong = self.locationManager.location?.coordinate.longitude
+        let usrLat = self.locationManager?.location?.coordinate.latitude
+        let usrLong = self.locationManager?.location?.coordinate.longitude
         print("lat:\(usrLat)")
         print("long: \(usrLong)")
         let url = dataRetrieve.data.urlP1+dataRetrieve.data.term+dataRetrieve.data.urlP1A+String(describing: usrLat!)+dataRetrieve.data.urlP2A+String(describing: usrLong!)
@@ -97,17 +78,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(ac, animated: true)
     }
-    /*
-    @IBAction func searchButton(_ sender: UIBarButtonItem) {
-        if searchField.hasText == true {
-            data.term = rewriteString(string: searchField.text!)
-            let url = data.urlP1+data.term+data.urlP2+data.location
-            loadRestaurantIds(url: url)
-            tableView.reloadData()
-            
-        }
-    }
-    */
+    
     func sortPageByRating(action: UIAlertAction) {
         reloadTableForSort = true
         dataRetrieve.data.restaurants.sort() { $0.rating > $1.rating }
@@ -130,7 +101,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         return string.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
     }
     
-    ////DELEGATE
+    ////DELEGATE METHODS
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
@@ -149,7 +120,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                 self.dataRetrieve.data.restaurantDetails[indexPath.row] = response
                 //guard lat != 0 && long != 0  else {return}
                 
-                if let distance = self.locationManager.location?.distance(from: CLLocation(latitude: lat, longitude: long)){
+                if let distance = self.locationManager?.location?.distance(from: CLLocation(latitude: lat, longitude: long)){
                     let newRestaurant = Restaurant(json: response, calculatedDistance: Double(distance))
                     self.dataRetrieve.data.restaurants[indexPath.row] = newRestaurant
                     cell.distanceLabel.text = String(describing: Int(distance/1000))+"km away"
