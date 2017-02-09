@@ -47,7 +47,7 @@ class DataRetrieval: NSObject {
     }
     
     func loadPic(index: Int, cell: CellClass, completion: @escaping (Image) -> ()){
-        Alamofire.request(self.data.restaurants[index].pictures[0]).responseImage { [unowned self] response in
+        Alamofire.request(self.data.restaurants[index].pictures[0]).responseImage { response in
             //print("*********start load pics")
             //debugPrint(response)
             if let image = response.result.value{

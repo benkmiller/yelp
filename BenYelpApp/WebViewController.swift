@@ -14,8 +14,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     var urlToLoad: String?
     
     override func loadView() {
-        
-        print("url is:  \(urlToLoad!)")
+    
         webView = WKWebView()
         webView.navigationDelegate = self
         view = webView

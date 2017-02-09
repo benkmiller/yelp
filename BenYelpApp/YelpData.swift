@@ -10,9 +10,8 @@ import UIKit
 import Alamofire
 
 
-class YelpData: NSObject {
+struct YelpData {
     
-
     var restaurants = [Restaurant](repeating: Restaurant(), count:10)
     var reviews = [Reviews](repeating: Reviews(), count: 10)
     var images = [ImageStruct](repeating: ImageStruct(), count: 10)
@@ -28,9 +27,6 @@ class YelpData: NSObject {
     let urlP2A = "&longitude="
     let urlReview = "/reviews"
     
-    
-        
-    
     var restaurantIds = ["","","","","","","","","",""]
     var restaurantNames = ["","","","","","","","","",""]
     var restaurantDistances = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
@@ -41,5 +37,4 @@ class YelpData: NSObject {
     var term = "ethiopian"
     var location = "Toronto"
 
-    
 }

@@ -52,7 +52,7 @@ struct Reviews {
     }
     var reviews: JSON = [:]
 }
-//chain requests for 3 images!!!!!
+
 struct ImageStruct {
     init(image: UIImage){
         image1 = image

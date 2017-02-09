@@ -26,7 +26,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround()
+        hideKeyboardWhenTappedAround()
         locationManager?.delegate = self
         self.searchField.delegate = self
     }
@@ -108,7 +108,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         
         if reloadTableForSort == false {
             dataRetrieve.loadRestaurantDetail(index: indexPath.row, cell: cell){ response in
-                debugPrint(response)
+                
                 let lat = response["coordinates"]["latitude"].doubleValue
                 let long = response["coordinates"]["longitude"].doubleValue
                 
@@ -166,7 +166,6 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             
             navigationController?.pushViewController(vc, animated: true)
         }
-       
     }
 
     override func didReceiveMemoryWarning() {
@@ -179,7 +178,9 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        let swipe: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        view.addGestureRecognizer(swipe)
         tap.cancelsTouchesInView = false
     }
     

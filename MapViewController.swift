@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController {
     
     @IBOutlet weak var map: MKMapView!
     let locationManager = CLLocationManager()
@@ -24,7 +24,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         map.delegate = self
         centerMap(lat: lat!, long: long!)
         setAnnotation()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,4 +50,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         map.addAnnotation(annotation)
     }
 
+}
+
+extension MapViewController: MKMapViewDelegate {
+    
 }

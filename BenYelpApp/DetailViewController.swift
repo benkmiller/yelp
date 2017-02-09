@@ -9,9 +9,9 @@
 import UIKit
 import Alamofire
 import AlamofireImage
-import WebKit
+//import WebKit
 
-class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationDelegate {
+class DetailViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var PhotoButton3: UIButton!
     @IBOutlet weak var PhotoButton1: UIButton!
@@ -49,24 +49,26 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
     
     func loadPic(){
         for index in 1...2 {
-        Alamofire.request((self.restDetail?.pictures[index])!).responseImage { [unowned self] response in
-            //print("*********start load pics")
-            //debugPrint(response)
-            if let image = response.result.value{
+        
+            Alamofire.request((restDetail?.pictures[index])!).responseImage { [weak self] response in
+                guard let viewController = self else {
+                    return
+                }
                 
-                if index == 1 {
-                    self.image2 = image
-                    self.PhotoButton2.setImage(self.image2, for: .normal)
+                if let image = response.result.value{
+                    if index == 1 {
+                        viewController.image2 = image
+                        viewController.PhotoButton2.setImage(viewController.image2, for: .normal)
+                    }
+                    if index == 2 {
+                        viewController.image3 = image
+                        viewController.PhotoButton3.setImage(viewController.image3, for: .normal)
+                    }
                 }
-                if index == 2 {
-                    self.image3 = image
-                    self.PhotoButton3.setImage(self.image3, for: .normal)
+                else{
+                    print("ERROR LOADING PIC")
                 }
             }
-            else{
-                print("ERROR LOADING PIC")
-            }
-        }
         }
         
     }
@@ -106,6 +108,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
             
             let timeString = "Time Created: "+(reviews?.reviews["reviews"][index]["time_created"].stringValue)!+"\n"
             let ratingString = "Rating: "+String(repeating: "★", count: Int((reviews?.reviews["reviews"][index]["rating"].stringValue)!)!)+"\n\n"
+            
             let reviewString = (reviews?.reviews["reviews"][index]["text"].stringValue)!+"\n\n"+"--------------------------------------------\n\n"
             
             totalString = authorString+timeString+ratingString+reviewString
@@ -118,7 +121,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
     }
     
     func setDetails(){
-        let catLine = " Category: "+(restDetail?.type)!+"\n"
+        let catLine = " Category: \((restDetail?.type)!)+\n"
         let addLine = " Address: "+(restDetail?.address)!+"\n"
         let priceLine = " Price: "+(restDetail?.price)!+"\n"
         let ratLine = " Avg Rating: "+String(repeating: "★", count: Int((restDetail?.rating)!))+"\n"
@@ -128,8 +131,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
     
     @IBAction func Photo1Pressed(_ sender: Any) {
         if let photoView = storyboard?.instantiateViewController(withIdentifier: "PhotoView") as? ImageViewController {
-            if image1?.image1 != nil {
-                photoView.image = image1?.image1
+            if let image = image1?.image1 {
+                photoView.image = image
             }
             navigationController?.pushViewController(photoView, animated: true)
         }
@@ -148,6 +151,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
             navigationController?.pushViewController(photoView, animated: true)
         }
     }
+    
     @IBAction func MapsButtonPressed(_ sender: Any) {
         if let mapView2 = storyboard?.instantiateViewController(withIdentifier: "mapView2") as? MapViewController {
             mapView2.lat = restDetail?.lat
@@ -164,15 +168,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, WKNavigationD
         navigationController?.pushViewController(vc, animated: true)
         
     }
-    
-    /*
-    func openTapped() {
-        let ac = UIAlertController(title: "Open page…", message: nil, preferredStyle: .actionSheet)
-        ac.addAction(UIAlertAction(title: "yelp.com", style: .default, handler: openPage))
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(ac, animated: true)
-    }
-    */
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
