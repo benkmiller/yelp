@@ -10,7 +10,6 @@ import MapKit
 
 class MapAnnotation: NSObject, MKAnnotation {
     
-    //let title: String
     let locationName: String
     let coordinate: CLLocationCoordinate2D
     

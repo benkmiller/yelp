@@ -13,25 +13,22 @@ import MapKit
 import CoreLocation
 
 
-class ViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate, CLLocationManagerDelegate, UITextFieldDelegate{
-    
-    //var data = YelpData() //Instantiate Data Model
+class ViewController: UITableViewController {
     var dataRetrieve =  DataRetrieval()
-    var userLocation: CLLocationCoordinate2D?
-    var locationManager: CLLocationManager?
+    //var userLocation: CLLocationCoordinate2D?
+    //var locationManager: CLLocationManager?
     var reloadTableForSort = false
-
     
     @IBOutlet weak var searchField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
-        locationManager?.delegate = self
+        dataRetrieve.data.locationManager.delegate = self
         self.searchField.delegate = self
     }
     
-    @IBAction func goTriggered(_ sender: Any) {
+    @IBAction func goTapped(_ sender: Any) {
         if searchField.hasText == true {
             reloadTableForSort = false
             dataRetrieve.data.term = rewriteString(string: searchField.text!)
@@ -48,9 +45,10 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         }
     }
     
-    @IBAction func nearMePressed(_ sender: Any) {
-        let usrLat = self.locationManager?.location?.coordinate.latitude
-        let usrLong = self.locationManager?.location?.coordinate.longitude
+   
+    @IBAction func nearMeTapped(_ sender: Any) {
+        let usrLat = self.dataRetrieve.data.locationManager.location?.coordinate.latitude
+        let usrLong = self.dataRetrieve.data.locationManager.location?.coordinate.longitude
         
         let url = dataRetrieve.data.urlP1+dataRetrieve.data.term+dataRetrieve.data.urlP1A+String(describing: usrLat!)+dataRetrieve.data.urlP2A+String(describing: usrLong!)
         
@@ -63,9 +61,11 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             }
             self.tableView.reloadData()
         }
+
     }
     
-    @IBAction func sortButton(_ sender: Any) {
+    
+    @IBAction func sortTapped(_ sender: Any) {
         reloadTableForSort = true
         let ac = UIAlertController(title: "Sort by...", message: nil, preferredStyle: .actionSheet)
         ac.addAction(UIAlertAction(title: "Rating", style: .default, handler: sortPageByRating))
@@ -73,6 +73,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(ac, animated: true)
     }
+    
     
     func sortPageByRating(action: UIAlertAction) {
         reloadTableForSort = true
@@ -96,7 +97,20 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
         return string.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
     }
     
-    ////DELEGATE METHODS
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+}
+
+
+////DELEGATE METHODS
+////DELEGATE METHODS
+////DELEGATE METHODS
+extension ViewController: UISearchBarDelegate, UISearchDisplayDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
@@ -115,7 +129,7 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                 self.dataRetrieve.data.restaurantDetails[indexPath.row] = response
                 //guard lat != 0 && long != 0  else {return}
                 
-                if let distance = self.locationManager?.location?.distance(from: CLLocation(latitude: lat, longitude: long)){
+                if let distance = self.dataRetrieve.data.locationManager.location?.distance(from: CLLocation(latitude: lat, longitude: long)){
                     let newRestaurant = Restaurant(json: response, calculatedDistance: Double(distance))
                     self.dataRetrieve.data.restaurants[indexPath.row] = newRestaurant
                     cell.distanceLabel.text = String(describing: Int(distance/1000))+"km away"
@@ -126,27 +140,25 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
                     cell.distanceLabel.text = String(describing: "no data")
                     
                 }
-            
+                
                 cell.name2.text = String(repeating: "★", count: Int(self.dataRetrieve.data.restaurants[indexPath.row].rating))
-                    
+                
                 self.dataRetrieve.loadPic(index: indexPath.row, cell: cell){ image in
                     let imageToSave = ImageStruct(image:image)
                     self.dataRetrieve.data.images[indexPath.row] = imageToSave
-                        
+                    
                     cell.IView.contentMode = UIViewContentMode.scaleAspectFit
                     cell.IView.image = image
-                        
+                    
                     self.dataRetrieve.loadRestaurantReview(index: indexPath.row, cell: cell){ jsonVal in
-                            //let jsonVal = JSON(responseData.result.value!)
+                        //let jsonVal = JSON(responseData.result.value!)
                         let newReview = Reviews(json: jsonVal)
                         self.dataRetrieve.data.reviews[indexPath.row] = newReview
                     }
                 }
-                
             }
-            
         }
-        
+            
         else {
             cell.name1.text = dataRetrieve.data.restaurants[indexPath.row].name
             cell.name2.text = String(repeating: "★", count: Int(self.dataRetrieve.data.restaurants[indexPath.row].rating))
@@ -167,13 +179,8 @@ class ViewController: UITableViewController, UISearchBarDelegate, UISearchDispla
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }
+
 
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {

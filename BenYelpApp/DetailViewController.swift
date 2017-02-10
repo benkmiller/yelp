@@ -11,15 +11,14 @@ import Alamofire
 import AlamofireImage
 //import WebKit
 
-class DetailViewController: UIViewController, UITableViewDelegate {
+class DetailViewController: UIViewController {
     
-    @IBOutlet weak var PhotoButton3: UIButton!
-    @IBOutlet weak var PhotoButton1: UIButton!
-    
-    @IBOutlet weak var PhotoButton2: UIButton!
-    @IBOutlet weak var MapsButton: UIButton!
-    @IBOutlet weak var ReviewButton: UIButton!
-    @IBOutlet weak var Details: UILabel!
+    @IBOutlet weak var photoButton2: UIButton!
+    @IBOutlet weak var photoButton3: UIButton!
+    @IBOutlet weak var photoButton1: UIButton!
+    @IBOutlet weak var mapsButton: UIButton!
+    @IBOutlet weak var reviewButton: UIButton!
+    @IBOutlet weak var details: UILabel!
     @IBOutlet weak var reviewView: UITextView!
     
     var restDetail: Restaurant?
@@ -58,11 +57,11 @@ class DetailViewController: UIViewController, UITableViewDelegate {
                 if let image = response.result.value{
                     if index == 1 {
                         viewController.image2 = image
-                        viewController.PhotoButton2.setImage(viewController.image2, for: .normal)
+                        viewController.photoButton2.setImage(viewController.image2, for: .normal)
                     }
                     if index == 2 {
                         viewController.image3 = image
-                        viewController.PhotoButton3.setImage(viewController.image3, for: .normal)
+                        viewController.photoButton3.setImage(viewController.image3, for: .normal)
                     }
                 }
                 else{
@@ -74,30 +73,30 @@ class DetailViewController: UIViewController, UITableViewDelegate {
     }
     
     func configureContent(){
-        PhotoButton1.imageView?.contentMode = UIViewContentMode.scaleAspectFit
-        PhotoButton2.imageView?.contentMode = UIViewContentMode.scaleAspectFit
-        PhotoButton3.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        photoButton1.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        photoButton2.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        photoButton3.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
-        PhotoButton1.layer.cornerRadius = 4
-        PhotoButton2.layer.cornerRadius = 4
-        PhotoButton3.layer.cornerRadius = 4
+        photoButton1.layer.cornerRadius = 4
+        photoButton2.layer.cornerRadius = 4
+        photoButton3.layer.cornerRadius = 4
         
-        MapsButton.backgroundColor = .clear
-        MapsButton.layer.cornerRadius = 4
-        MapsButton.layer.borderWidth = 1
-        MapsButton.layer.borderColor = UIColor(netHex:0xFF8E79).cgColor
+        mapsButton.backgroundColor = .clear
+        mapsButton.layer.cornerRadius = 4
+        mapsButton.layer.borderWidth = 1
+        mapsButton.layer.borderColor = UIColor(netHex:0xFF8E79).cgColor
         
-        ReviewButton.backgroundColor = UIColor(netHex:0xFF8E79)
-        ReviewButton.layer.cornerRadius = 4
+        reviewButton.backgroundColor = UIColor(netHex:0xFF8E79)
+        reviewButton.layer.cornerRadius = 4
         
         reviewView.layer.cornerRadius = 4
         
-        Details.layer.masksToBounds = true
-        Details.layer.cornerRadius = 4
+        details.layer.masksToBounds = true
+        details.layer.cornerRadius = 4
     }
     
     func setPics() {
-        PhotoButton1.setImage(image1?.image1, for: .normal)
+        photoButton1.setImage(image1?.image1, for: .normal)
         //PhotoButton2.setImage(restDetail.image2, for: .normal)
         //PhotoButton3.setImage(restDetail.image3, for: .normal)
     }
@@ -126,10 +125,11 @@ class DetailViewController: UIViewController, UITableViewDelegate {
         let priceLine = " Price: "+(restDetail?.price)!+"\n"
         let ratLine = " Avg Rating: "+String(repeating: "★", count: Int((restDetail?.rating)!))+"\n"
         let revLine = " Phone Number: "+(restDetail?.phoneNum)!
-        Details.text = catLine+addLine+priceLine+ratLine+revLine
+        details.text = catLine+addLine+priceLine+ratLine+revLine
     }
     
-    @IBAction func Photo1Pressed(_ sender: Any) {
+    
+    @IBAction func photo1Tapped(_ sender: Any) {
         if let photoView = storyboard?.instantiateViewController(withIdentifier: "PhotoView") as? ImageViewController {
             if let image = image1?.image1 {
                 photoView.image = image
@@ -137,22 +137,25 @@ class DetailViewController: UIViewController, UITableViewDelegate {
             navigationController?.pushViewController(photoView, animated: true)
         }
     }
-
-    @IBAction func Photo2Pressed(_ sender: Any) {
+    
+    @IBAction func photo2Pressed(_ sender: Any) {
         if let photoView = storyboard?.instantiateViewController(withIdentifier: "PhotoView") as? ImageViewController {
             photoView.image = image2
             navigationController?.pushViewController(photoView, animated: true)
         }
+
     }
-    
-    @IBAction func Photo3Pressed(_ sender: Any) {
+
+        
+    @IBAction func photo3Tapped(_ sender: Any) {
         if let photoView = storyboard?.instantiateViewController(withIdentifier: "PhotoView") as? ImageViewController {
             photoView.image = image3
             navigationController?.pushViewController(photoView, animated: true)
         }
     }
     
-    @IBAction func MapsButtonPressed(_ sender: Any) {
+    
+    @IBAction func mapsButtonPressed(_ sender: Any) {
         if let mapView2 = storyboard?.instantiateViewController(withIdentifier: "mapView2") as? MapViewController {
             mapView2.lat = restDetail?.lat
             mapView2.long = restDetail?.long
@@ -161,13 +164,14 @@ class DetailViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-    @IBAction func ReviewButtonPressed(_ sender: Any) {
+    
+    @IBAction func reviewButtonTapped(_ sender: Any) {
         let vc = WebViewController()
         
         vc.urlToLoad = reviews?.reviews["reviews"][0]["url"].stringValue
         navigationController?.pushViewController(vc, animated: true)
-        
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

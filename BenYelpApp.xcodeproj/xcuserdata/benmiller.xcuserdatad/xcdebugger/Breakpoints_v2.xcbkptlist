@@ -6,64 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BenYelpApp/ViewController.swift"
-            timestampString = "508184908.211496"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "tableView(_:didSelectRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BenYelpApp/ViewController.swift"
-            timestampString = "508193340.080125"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
-            landmarkName = "tableView(_:didSelectRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BenYelpApp/TitleViewController.swift"
-            timestampString = "508190851.013421"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "TitleViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BenYelpApp/DetailViewController.swift"
-            timestampString = "508191209.466033"
+            timestampString = "508368703.525108"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "MapsButtonPressed(_:)"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "mapsButtonPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BenYelpApp/DetailViewController.swift"
-            timestampString = "507760983.962804"
+            timestampString = "508368703.525108"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
             landmarkName = "DetailViewController"
             landmarkType = "3">
             <Locations>
@@ -152,12 +104,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BenYelpApp/DetailViewController.swift"
-            timestampString = "508191209.466033"
+            timestampString = "508368703.525108"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "Photo1Pressed(_:)"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "setDetails()"
             landmarkType = "7">
             <Locations>
                <Location
@@ -199,70 +151,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BenYelpApp/DetailViewController.swift"
-            timestampString = "508191209.466033"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "Photo2Pressed(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BenYelpApp/DetailViewController.swift"
-            timestampString = "508191209.466033"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "Photo2Pressed(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BenYelpApp.DetailViewController.Photo2Pressed (Any) -&gt; ()"
-                  moduleName = "BenYelpApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/benmiller/Desktop/App&apos;s/BenYelpApp/BenYelpApp/DetailViewController.swift"
-                  timestampString = "508191209.686644"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "139"
-                  endingLineNumber = "139"
-                  offsetFromSymbolStart = "36">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BenYelpApp.DetailViewController.Photo2Pressed (Any) -&gt; ()"
-                  moduleName = "BenYelpApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/benmiller/Desktop/App&apos;s/BenYelpApp/BenYelpApp/DetailViewController.swift"
-                  timestampString = "508191209.694278"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "139"
-                  endingLineNumber = "139"
-                  offsetFromSymbolStart = "596">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "BenYelpApp/ImageViewController.swift"
             timestampString = "508185059.820237"
             startingColumnNumber = "9223372036854775807"
@@ -280,92 +168,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BenYelpApp/ViewController.swift"
-            timestampString = "508184908.211496"
+            timestampString = "508364679.606085"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "sortPageByDistance(action:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BenYelpApp/ViewController.swift"
-            timestampString = "508184908.211496"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "nearMePressed(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BenYelpApp/ViewController.swift"
-            timestampString = "508184908.211496"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "nearMePressed(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BenYelpApp/TitleViewController.swift"
-            timestampString = "508190851.013421"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "ButtonPressed(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BenYelpApp/TitleViewController.swift"
-            timestampString = "508190851.013421"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "ButtonPressed(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BenYelpApp/TitleViewController.swift"
-            timestampString = "508190851.013421"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "ButtonPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

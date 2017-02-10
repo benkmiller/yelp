@@ -12,11 +12,11 @@ class ImageViewController: UIViewController {
     
     var image: UIImage?
 
-    @IBOutlet weak var _Image: UIImageView!
+    @IBOutlet weak var pic: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        _Image.image = image
+        pic.image = image
     }
 
     override func didReceiveMemoryWarning() {

@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import CoreLocation
 
 
 struct YelpData {
@@ -33,6 +34,9 @@ struct YelpData {
     
     var dat:JSON = [""]
     var restaurantDetails: JSON = [""]
+    
+    var userLocation: CLLocationCoordinate2D?
+    var locationManager =  CLLocationManager()
     
     var term = "ethiopian"
     var location = "Toronto"

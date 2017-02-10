@@ -12,7 +12,7 @@ import AlamofireImage
 
 
 
-class DataRetrieval: NSObject {
+class DataRetrieval {
     
     var data = YelpData()
 

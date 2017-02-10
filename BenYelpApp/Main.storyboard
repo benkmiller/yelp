@@ -34,7 +34,7 @@
                                     <constraint firstAttribute="height" constant="258" id="lKC-sL-5FK"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Where to find food?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ssC-Ul-pRf">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Where to find food?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ssC-Ul-pRf" userLabel="locationLabel">
                                 <rect key="frame" x="119" y="425" width="167" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="HOV-qy-LsH"/>
@@ -47,7 +47,7 @@
                                 <rect key="frame" x="124" y="494" width="126" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufl-Qu-dlI">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufl-Qu-dlI" userLabel="button">
                                         <rect key="frame" x="0.0" y="0.0" width="126" height="54"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="126" id="46P-jS-irc"/>
@@ -57,7 +57,7 @@
                                             <color key="titleColor" red="1" green="0.1187502725" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="ButtonPressed:" destination="Z9w-8s-3bY" eventType="touchUpInside" id="RjG-Zu-jMQ"/>
+                                            <action selector="buttonTapped:" destination="Z9w-8s-3bY" eventType="touchUpInside" id="V6Q-3v-J3z"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -76,8 +76,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="45T-DS-87g"/>
                     <connections>
-                        <outlet property="Button" destination="ufl-Qu-dlI" id="O2U-bv-fxP"/>
-                        <outlet property="TitleLabel" destination="ssC-Ul-pRf" id="W0b-yq-ED4"/>
+                        <outlet property="button" destination="ufl-Qu-dlI" id="TDZ-fd-bRw"/>
+                        <outlet property="locationLabel" destination="ssC-Ul-pRf" id="4RA-l4-rso"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZHF-mG-FWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -115,13 +115,13 @@
                                             <rect key="frame" x="97" y="8" width="102" height="37"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;nameLabel&gt;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="Vki-j2-RqP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="102" height="19.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="102" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <color key="textColor" red="0.53492228138632103" green="0.37768769138869479" blue="0.17711066608307041" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;#stars&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9h-hC-Wfb">
-                                                    <rect key="frame" x="0.0" y="19.5" width="58.5" height="17"/>
+                                                    <rect key="frame" x="0.0" y="20" width="59" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.53492228138632103" green="0.37768769138869479" blue="0.17711066608307041" alpha="0.66906571061643838" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -167,18 +167,18 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="go"/>
                             <connections>
-                                <action selector="goTriggered:" destination="EiK-J8-te5" eventType="primaryActionTriggered" id="o1g-Ux-1NK"/>
+                                <action selector="goTapped:" destination="EiK-J8-te5" eventType="primaryActionTriggered" id="HfJ-Hf-ibD"/>
                             </connections>
                         </textField>
                         <rightBarButtonItems>
                             <barButtonItem title="Near Me" id="JcQ-KJ-02p">
                                 <connections>
-                                    <action selector="nearMePressed:" destination="EiK-J8-te5" id="Mf4-gb-Puv"/>
+                                    <action selector="nearMeTapped:" destination="EiK-J8-te5" id="WGr-5B-ee5"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Sort" id="taI-ld-Bfx">
                                 <connections>
-                                    <action selector="sortButton:" destination="EiK-J8-te5" id="0Da-EV-IOQ"/>
+                                    <action selector="sortTapped:" destination="EiK-J8-te5" id="PfE-9I-0Rx"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -221,6 +221,7 @@
         <!--Navigation Controller-->
         <scene sceneID="lGi-Dx-Vb4">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qbo-YA-hQ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OAe-ME-DvE" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UEi-C9-6iH">
@@ -232,7 +233,6 @@
                         <segue destination="Z9w-8s-3bY" kind="relationship" relationship="rootViewController" id="Xj5-N5-X3d"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qbo-YA-hQ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="700" y="-628.33583208395805"/>
         </scene>
@@ -270,21 +270,21 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="Photo1Pressed:" destination="gk0-rf-moR" eventType="touchUpInside" id="0bo-et-Rv2"/>
+                                                            <action selector="photo1Tapped:" destination="gk0-rf-moR" eventType="touchUpInside" id="lfo-iW-qbf"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nge-AZ-guh">
                                                         <rect key="frame" x="115" y="0.0" width="113" height="125"/>
                                                         <state key="normal" title="Button"/>
                                                         <connections>
-                                                            <action selector="Photo2Pressed:" destination="gk0-rf-moR" eventType="touchUpInside" id="xGn-gY-eeP"/>
+                                                            <action selector="photo2Pressed:" destination="gk0-rf-moR" eventType="touchUpInside" id="gMI-8f-kzj"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPZ-PH-Zar">
                                                         <rect key="frame" x="231" y="0.0" width="112" height="125"/>
                                                         <state key="normal" title="Button"/>
                                                         <connections>
-                                                            <action selector="Photo3Pressed:" destination="gk0-rf-moR" eventType="touchUpInside" id="c5z-Nx-y65"/>
+                                                            <action selector="photo3Tapped:" destination="gk0-rf-moR" eventType="touchUpInside" id="uhq-ZS-1ls"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -346,7 +346,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="ReviewButtonPressed:" destination="gk0-rf-moR" eventType="touchUpInside" id="0zh-E8-iaD"/>
+                                            <action selector="reviewButtonTapped:" destination="gk0-rf-moR" eventType="touchUpInside" id="EYG-bt-Lli"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ng-xa-C6p">
@@ -356,7 +356,7 @@
                                             <color key="titleColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="MapsButtonPressed:" destination="gk0-rf-moR" eventType="touchUpInside" id="yT7-tK-13q"/>
+                                            <action selector="mapsButtonPressed:" destination="gk0-rf-moR" eventType="touchUpInside" id="Mqx-Ei-FYd"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -380,13 +380,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="Details" destination="9ww-kr-edS" id="bOo-6n-9Sc"/>
-                        <outlet property="MapsButton" destination="3Ng-xa-C6p" id="zaw-oE-aBo"/>
-                        <outlet property="PhotoButton1" destination="9Sj-Va-VHi" id="OsH-VM-pO7"/>
-                        <outlet property="PhotoButton2" destination="nge-AZ-guh" id="Y15-6L-FdP"/>
-                        <outlet property="PhotoButton3" destination="QPZ-PH-Zar" id="sWT-Hk-lq6"/>
-                        <outlet property="ReviewButton" destination="u5A-Bl-agz" id="gUV-uD-vGN"/>
-                        <outlet property="reviewView" destination="5bj-SW-KeG" id="vZk-bJ-KF2"/>
+                        <outlet property="details" destination="9ww-kr-edS" id="OW2-RQ-ha2"/>
+                        <outlet property="mapsButton" destination="3Ng-xa-C6p" id="rNK-tx-XhG"/>
+                        <outlet property="photoButton1" destination="9Sj-Va-VHi" id="yuB-uU-ALV"/>
+                        <outlet property="photoButton2" destination="nge-AZ-guh" id="toe-xp-3eP"/>
+                        <outlet property="photoButton3" destination="QPZ-PH-Zar" id="JlM-e8-dFr"/>
+                        <outlet property="reviewButton" destination="u5A-Bl-agz" id="Uhl-J7-DrF"/>
+                        <outlet property="reviewView" destination="5bj-SW-KeG" id="0Dc-gQ-YzX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jSV-pR-ZeT" userLabel="First Responder" sceneMemberID="firstResponder"/>

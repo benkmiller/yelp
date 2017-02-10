@@ -9,24 +9,18 @@
 import UIKit
 
 class CellClass: UITableViewCell {
+    
     @IBOutlet weak var name1: UILabel!
     @IBOutlet weak var name2: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var IView: UIImageView!
     
- 
-
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        IView.layer.cornerRadius = 4
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
-
 }

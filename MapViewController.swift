@@ -21,7 +21,6 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = restDetail?.name
-        map.delegate = self
         centerMap(lat: lat!, long: long!)
         setAnnotation()
     }
@@ -50,8 +49,4 @@ class MapViewController: UIViewController {
         map.addAnnotation(annotation)
     }
 
-}
-
-extension MapViewController: MKMapViewDelegate {
-    
 }

@@ -12,13 +12,13 @@ import CoreLocation
 
 class TitleViewController: UIViewController {
     
-    var userLocation: CLLocationCoordinate2D?
-    var locationManager =  CLLocationManager()
+    //var userLocation: CLLocationCoordinate2D?
+    //var locationManager =  CLLocationManager()
     
     var dataRetrieve = DataRetrieval()
     
-    @IBOutlet weak var Button: UIButton!
-    @IBOutlet weak var TitleLabel: UITextField!
+    @IBOutlet weak var locationLabel: UITextField!
+    @IBOutlet weak var button: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,16 +53,16 @@ class TitleViewController: UIViewController {
     }
     
     func configure() {
-        Button.backgroundColor = .clear
-        Button.layer.cornerRadius = 4
-        Button.layer.borderWidth = 1
-        Button.layer.borderColor = UIColor.red.cgColor
+        button.backgroundColor = .clear
+        button.layer.cornerRadius = 4
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.red.cgColor
     }
     
-    @IBAction func ButtonPressed(_ sender: UIButton) {
+    @IBAction func buttonTapped(_ sender: Any) {
         if let tabView = storyboard?.instantiateViewController(withIdentifier: "Table") as? ViewController {
-            if TitleLabel.text != nil && TitleLabel.text != ""{
-                dataRetrieve.data.location = tabView.rewriteString(string: TitleLabel.text!)
+            if locationLabel.text != nil && locationLabel.text != ""{
+                dataRetrieve.data.location = tabView.rewriteString(string: locationLabel.text!)
                 dataRetrieve.loadRestaurantIds(url: dataRetrieve.data.urlP1+dataRetrieve.data.term+dataRetrieve.data.urlP2+dataRetrieve.data.location){ [unowned self] response in
                     
                     //let jsonVar = JSON(response.result.value!)
@@ -71,40 +71,63 @@ class TitleViewController: UIViewController {
                         self.dataRetrieve.data.restaurantNames[index] = response["businesses"][index]["name"].stringValue
                         self.dataRetrieve.data.dat = response;
                     }
-                    tabView.userLocation = self.userLocation
-                    tabView.locationManager = self.locationManager
                     tabView.dataRetrieve = self.dataRetrieve
-                    tabView.dataRetrieve.data = self.dataRetrieve.data
                     self.navigationController?.pushViewController(tabView, animated: true)
                 }
             }
             else {
-                tabView.userLocation = userLocation
-                tabView.locationManager = locationManager
                 tabView.dataRetrieve = dataRetrieve
-                tabView.dataRetrieve.data = dataRetrieve.data
                 navigationController?.pushViewController(tabView, animated: true)
             }
         }
+
     }
     
-    ///LOCATION METHODS
-    override func viewDidAppear(_ animated: Bool) {
-        //self.hideKeyboardWhenTappedAround()
-        //locationAuthStatus()
-        
+    
+    /*
+    @IBAction func buttonTapped(_ sender: Any) {
+       performSegue(withIdentifier: "goToTableView", sender: nil)
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToTableView" {
+            if let tabView = segue.destination as? ViewController {
+                if locationLabel.text != nil && locationLabel.text != ""{
+                    dataRetrieve.data.location = tabView.rewriteString(string: locationLabel.text!)
+                    dataRetrieve.loadRestaurantIds(url: dataRetrieve.data.urlP1+dataRetrieve.data.term+dataRetrieve.data.urlP2+dataRetrieve.data.location){ [unowned self] response in
+                        
+                        //let jsonVar = JSON(response.result.value!)
+                        for index in 0...9 {
+                            self.dataRetrieve.data.restaurantIds[index] = response["businesses"][index]["id"].stringValue
+                            self.dataRetrieve.data.restaurantNames[index] = response["businesses"][index]["name"].stringValue
+                            self.dataRetrieve.data.dat = response;
+                        }
+                        tabView.userLocation = self.userLocation
+                        tabView.locationManager = self.locationManager
+                        tabView.dataRetrieve = self.dataRetrieve
+                        tabView.dataRetrieve.data = self.dataRetrieve.data
+                    }
+                }
+                else {
+                    tabView.userLocation = userLocation
+                    tabView.locationManager = locationManager
+                    tabView.dataRetrieve = dataRetrieve
+                    tabView.dataRetrieve.data = dataRetrieve.data
+                }
+            }
+        }
+    }
+    */
+    ///LOCATION METHODS
     
     func locationAuthStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             //map.showsUserLocation = true
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            //locationManager.requestLocation()
-            locationManager.startUpdatingLocation()
-            
+            dataRetrieve.data.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            dataRetrieve.data.locationManager.startUpdatingLocation()
         }
         else {
-            self.locationManager.requestWhenInUseAuthorization()
+            dataRetrieve.data.locationManager.requestWhenInUseAuthorization()
         }
     }
 
